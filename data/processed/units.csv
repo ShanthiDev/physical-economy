@@ -1,0 +1,4 @@
+unit_id,unit_name,unit_type,conversion_to_base_unit,notes
+tonne,Metric tonne,mass,1.0,Primary v0.1 unit
+kilogram,Kilogram,mass,0.001,Included for future conversions
+usd_thousand,Thousand current US dollars,value,1.0,BACI-style trade value unit

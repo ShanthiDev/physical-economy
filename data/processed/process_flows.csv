@@ -1,0 +1,1 @@
+process_flow_id,process_id,commodity_id,flow_role,coefficient,unit_id,is_required_input,is_coproduct,is_residual,uncertainty_level,source_dataset,source_version,notes

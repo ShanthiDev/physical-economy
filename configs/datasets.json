@@ -1,0 +1,7 @@
+{
+  "target_year": 2024,
+  "raw_trade_path": "data/raw/baci/BACI_HS22_V202601.zip",
+  "source_dataset": "CEPII BACI",
+  "source_version": "HS22_V202601",
+  "hs_revision": "HS22"
+}

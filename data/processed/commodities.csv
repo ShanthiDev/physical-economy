@@ -1,0 +1,22 @@
+commodity_id,commodity_group,commodity_name,physical_unit_default,is_primary_resource,is_energy_carrier,is_food_related,is_mineral_related,notes
+hard_coal,energy,Hard coal,tonne,true,true,false,true,HS 270112 aggregate
+crude_oil,energy,Crude oil,tonne,true,true,false,false,HS 270900 aggregate
+refined_petroleum,energy,Refined petroleum products,tonne,false,true,false,false,HS 271000 aggregate
+natural_gas,energy,Natural gas and LNG,tonne,true,true,false,false,HS 271111 and 271121 aggregate
+electricity,energy,Electrical energy,tonne,false,true,false,false,HS 271600 is not physically tonnes but retained as BACI quantity for v0.1 display
+wheat,agriculture,Wheat,tonne,true,false,true,false,HS 100111 100119 100191 100199 aggregate
+maize,agriculture,Maize,tonne,true,false,true,false,HS 100510 and 100590 aggregate
+soybeans,agriculture,Soybeans,tonne,true,false,true,false,HS 120190 aggregate
+soybean_meal,agriculture,Soybean meal and oil-cake,tonne,false,false,true,false,HS 230400 aggregate
+vegetable_oils,agriculture,Vegetable oils,tonne,false,false,true,false,Selected soybean maize sunflower rape and palm oils
+iron_ore,metals,Iron ore,tonne,true,false,false,true,HS 260111 and 260112 aggregate
+copper_ore,metals,Copper ore,tonne,true,false,false,true,HS 260300 aggregate
+refined_copper,metals,Refined copper,tonne,false,false,false,true,HS 740311-740319 aggregate
+bauxite_alumina,metals,Bauxite and alumina,tonne,true,false,false,true,HS 260600 281810 281820 aggregate
+primary_aluminium,metals,Primary aluminium,tonne,false,false,false,true,HS 760110 and 760120 aggregate
+phosphate_rock,fertilizer,Phosphate rock,tonne,true,false,false,true,HS 251010 and 251020 aggregate
+ammonia,fertilizer,Ammonia,tonne,false,false,false,false,HS 281410 and 281420 aggregate
+urea,fertilizer,Urea,tonne,false,false,false,false,HS 310210 aggregate
+nitrogen_fertilizers,fertilizer,Nitrogen fertilizers,tonne,false,false,false,false,Selected HS 3102 nitrogen fertilizers excluding urea
+potash_fertilizers,fertilizer,Potash fertilizers,tonne,true,false,false,true,HS 310420 310430 310490 aggregate
+compound_fertilizers,fertilizer,Compound fertilizers,tonne,false,false,false,false,Selected HS 3105 NP/NPK compound fertilizers

@@ -1,0 +1,9 @@
+{
+  "target_year": 2024,
+  "raw_rows": 81466,
+  "trade_flows": 78741,
+  "net_trade_flows": 37280,
+  "render_flows": 1600,
+  "commodities": 21,
+  "countries": 221
+}

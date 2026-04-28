@@ -1,0 +1,31 @@
+{
+  "default_flow_mode": "net",
+  "default_commodity": "all",
+  "unit_id": "tonne",
+  "max_render_flows_per_commodity": 80,
+  "min_render_line_width": 1.4,
+  "max_render_line_width": 11.0,
+  "commodity_colors": {
+    "hard_coal": "rgba(54, 50, 45, 0.84)",
+    "crude_oil": "rgba(21, 20, 18, 0.86)",
+    "refined_petroleum": "rgba(79, 86, 92, 0.82)",
+    "natural_gas": "rgba(83, 174, 218, 0.78)",
+    "electricity": "rgba(255, 219, 88, 0.86)",
+    "wheat": "rgba(219, 174, 77, 0.86)",
+    "maize": "rgba(239, 196, 66, 0.84)",
+    "soybeans": "rgba(92, 143, 82, 0.84)",
+    "soybean_meal": "rgba(139, 116, 76, 0.84)",
+    "vegetable_oils": "rgba(205, 148, 57, 0.84)",
+    "iron_ore": "rgba(169, 78, 47, 0.86)",
+    "copper_ore": "rgba(44, 151, 130, 0.86)",
+    "refined_copper": "rgba(204, 113, 58, 0.86)",
+    "bauxite_alumina": "rgba(184, 149, 106, 0.84)",
+    "primary_aluminium": "rgba(187, 204, 209, 0.86)",
+    "phosphate_rock": "rgba(126, 107, 76, 0.84)",
+    "ammonia": "rgba(102, 190, 168, 0.84)",
+    "urea": "rgba(225, 232, 196, 0.86)",
+    "nitrogen_fertilizers": "rgba(136, 202, 105, 0.84)",
+    "potash_fertilizers": "rgba(204, 115, 142, 0.84)",
+    "compound_fertilizers": "rgba(166, 188, 91, 0.84)"
+  }
+}

@@ -1,0 +1,65 @@
+commodity_id,classification_system,classification_version,code,code_label,include_flag,mapping_confidence,notes
+crude_oil,Harmonized System,2022,270900,Petroleum oils and oils obtained from bituminous minerals crude,true,high,Coarse HS6 seed mapping
+hard_coal,Harmonized System,2022,270111,Coal anthracite not agglomerated,true,medium,Includes key hard coal HS22 codes
+hard_coal,Harmonized System,2022,270112,Coal bituminous not agglomerated,true,medium,Includes key hard coal HS22 codes
+hard_coal,Harmonized System,2022,270119,Coal other than anthracite and bituminous not agglomerated,true,medium,Includes other coal because HS trade does not cleanly match energy coal categories
+refined_petroleum,Harmonized System,2022,271000,Petroleum oils not crude,true,medium,Broad refined petroleum product basket
+natural_gas,Harmonized System,2022,271111,Natural gas liquefied,true,high,LNG
+natural_gas,Harmonized System,2022,271121,Natural gas in gaseous state,true,high,Pipeline gas where reported in HS trade
+electricity,Harmonized System,2022,271600,Electrical energy,true,medium,BACI quantity is retained as reported; not a mass flow
+wheat,Harmonized System,2022,100111,Wheat and meslin durum seed,true,medium,Wheat basket
+wheat,Harmonized System,2022,100119,Wheat and meslin durum other than seed,true,medium,Wheat basket
+wheat,Harmonized System,2022,100191,Wheat and meslin other than durum seed,true,medium,Wheat basket
+wheat,Harmonized System,2022,100199,Wheat and meslin other than durum other than seed,true,medium,Wheat basket
+maize,Harmonized System,2022,100510,Maize seed,true,medium,Maize basket
+maize,Harmonized System,2022,100590,Maize other than seed,true,medium,Maize basket
+soybeans,Harmonized System,2022,120110,Soya beans seed,true,medium,Soybean basket
+soybeans,Harmonized System,2022,120190,Soya beans whether or not broken other than seed,true,medium,Seed mapping for soybean demo
+soybean_meal,Harmonized System,2022,230400,Oil-cake and residues from soybean oil extraction,true,high,Soy crushing co-product
+vegetable_oils,Harmonized System,2022,150710,Soybean oil crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,150790,Soybean oil other than crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151211,Sunflower or safflower oil crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151219,Sunflower or safflower oil other than crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151411,Rape or colza oil low erucic crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151419,Rape or colza oil low erucic other than crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151491,Rape or colza oil other crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151499,Rape or colza oil other than crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151110,Palm oil crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151190,Palm oil other than crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151521,Maize oil crude,true,medium,Vegetable oil basket
+vegetable_oils,Harmonized System,2022,151529,Maize oil other than crude,true,medium,Vegetable oil basket
+iron_ore,Harmonized System,2022,260111,Iron ores and concentrates non-agglomerated,true,high,Iron ore basket
+iron_ore,Harmonized System,2022,260112,Iron ores and concentrates agglomerated,true,high,Iron ore basket
+copper_ore,Harmonized System,2022,260300,Copper ores and concentrates,true,high,Seed mapping for copper ore
+refined_copper,Harmonized System,2022,740311,Refined copper cathodes and sections of cathodes,true,high,Refined copper basket
+refined_copper,Harmonized System,2022,740312,Refined copper wire-bars,true,high,Refined copper basket
+refined_copper,Harmonized System,2022,740313,Refined copper billets,true,high,Refined copper basket
+refined_copper,Harmonized System,2022,740319,Refined copper unwrought n.e.c.,true,high,Refined copper basket
+bauxite_alumina,Harmonized System,2022,260600,Aluminium ores and concentrates,true,high,Bauxite proxy
+bauxite_alumina,Harmonized System,2022,281810,Artificial corundum,true,medium,Alumina-related basket
+bauxite_alumina,Harmonized System,2022,281820,Aluminium oxide other than artificial corundum,true,high,Alumina basket
+primary_aluminium,Harmonized System,2022,760110,Unwrought aluminium not alloyed,true,high,Primary aluminium basket
+primary_aluminium,Harmonized System,2022,760120,Unwrought aluminium alloys,true,medium,Primary aluminium and unwrought alloys basket
+phosphate_rock,Harmonized System,2022,251010,Natural calcium phosphates unground,true,medium,Partial phosphate mapping
+phosphate_rock,Harmonized System,2022,251020,Natural calcium phosphates ground,true,medium,Partial phosphate mapping
+ammonia,Harmonized System,2022,281410,Anhydrous ammonia,true,high,Ammonia basket
+ammonia,Harmonized System,2022,281420,Ammonia in aqueous solution,true,medium,Ammonia basket
+urea,Harmonized System,2022,310210,Urea whether or not in aqueous solution,true,high,Urea fertilizer
+nitrogen_fertilizers,Harmonized System,2022,310221,Ammonium sulphate,true,medium,Nitrogen fertilizer basket excluding urea
+nitrogen_fertilizers,Harmonized System,2022,310229,Nitrogenous fertilizers other than ammonium sulphate,true,medium,Nitrogen fertilizer basket excluding urea
+nitrogen_fertilizers,Harmonized System,2022,310230,Ammonium nitrate,true,medium,Nitrogen fertilizer basket excluding urea
+nitrogen_fertilizers,Harmonized System,2022,310240,Ammonium nitrate with calcium carbonate,true,medium,Nitrogen fertilizer basket excluding urea
+nitrogen_fertilizers,Harmonized System,2022,310250,Sodium nitrate,true,medium,Nitrogen fertilizer basket excluding urea
+nitrogen_fertilizers,Harmonized System,2022,310260,Calcium nitrate and ammonium nitrate mixtures,true,medium,Nitrogen fertilizer basket excluding urea
+nitrogen_fertilizers,Harmonized System,2022,310280,Urea and ammonium nitrate solution,true,medium,Nitrogen fertilizer basket including UAN
+nitrogen_fertilizers,Harmonized System,2022,310290,Nitrogenous fertilizers n.e.c.,true,medium,Nitrogen fertilizer basket excluding urea
+potash_fertilizers,Harmonized System,2022,310420,Potassium chloride,true,high,Potash basket
+potash_fertilizers,Harmonized System,2022,310430,Potassium sulphate,true,medium,Potash basket
+potash_fertilizers,Harmonized System,2022,310490,Potassic fertilizers n.e.c.,true,medium,Potash basket
+compound_fertilizers,Harmonized System,2022,310520,NPK compound fertilizers,true,medium,Compound fertilizer basket
+compound_fertilizers,Harmonized System,2022,310530,Diammonium hydrogenorthophosphate,true,medium,Compound fertilizer basket
+compound_fertilizers,Harmonized System,2022,310540,Monoammonium phosphate and DAP mixtures,true,medium,Compound fertilizer basket
+compound_fertilizers,Harmonized System,2022,310551,Fertilizers containing nitrates and phosphates,true,medium,Compound fertilizer basket
+compound_fertilizers,Harmonized System,2022,310559,Nitrogen and phosphorus fertilizers other than nitrate/phosphate,true,medium,Compound fertilizer basket
+compound_fertilizers,Harmonized System,2022,310560,Phosphorus and potassium fertilizers,true,medium,Compound fertilizer basket
+compound_fertilizers,Harmonized System,2022,310590,Fertilizers n.e.c. in heading 3105,true,medium,Compound fertilizer basket
