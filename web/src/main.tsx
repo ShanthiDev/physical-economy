@@ -6,13 +6,16 @@ import type {CommodityOption, FlowRecord, FlowmapPayload} from './types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
 const INITIAL_VIEW_STATE = {longitude: 18, latitude: 22, zoom: 1.22, pitch: 0, bearing: 0};
+const GLOBE_INITIAL_VIEW_STATE = {longitude: 18, latitude: 12, zoom: 0.15, minZoom: -1.4, maxZoom: 8};
 const EARTH_RADIUS_METERS = 6_371_000;
 const SPEED_REFERENCE_ROUTE_METERS = 4_000_000;
 const ROUTE_WIDTH_METERS = 65_000;
 const TRAIL_SPACING_PIXEL_SCALE = 10;
 const UNIFORM_PLUME_WIDTH_DEGREES = 0.9;
+const GLOBE_SURFACE_OFFSET_METERS = 18_000;
 const rootElement = document.getElementById('root');
 type HoverCard = {text: string; x: number; y: number} | null;
+type ViewMode = 'map' | 'globe';
 type RenderMode =
   | 'flowmap-straight'
   | 'flowmap-curved'
@@ -23,6 +26,7 @@ type RenderMode =
   | 'particle-arc-trails';
 type Point = [number, number];
 type Position3D = [number, number, number];
+type Vector3 = [number, number, number];
 type RenderConfig = {
   particleBudget: number;
   speed: number;
@@ -71,7 +75,7 @@ type ParticlePoint = {
 type EndpointPoint = {
   id: string;
   name: string;
-  position: Point;
+  position: Position3D;
   tonnes: number;
 };
 type RoutePath = {
@@ -79,12 +83,26 @@ type RoutePath = {
   flow: FlowRecord;
   path: Position3D[];
 };
+type RouteArc = {
+  id: string;
+  flow: FlowRecord;
+  source: Position3D;
+  target: Position3D;
+};
 type FlowParticlePlan = {
   flow: FlowRecord;
   source: Point;
   target: Point;
   routeDistanceMeters: number;
   weight: number;
+};
+type GlobeSurfaceCell = {
+  id: string;
+  polygon: Point[];
+};
+type GlobeGridLine = {
+  id: string;
+  path: Position3D[];
 };
 
 const DEFAULT_RENDER_CONFIG: RenderConfig = {
@@ -103,7 +121,7 @@ const DEFAULT_RENDER_CONFIG: RenderConfig = {
   routeOpacity: 0.4,
   routeWidth: 3,
   arcCurve: 1,
-  arcHeight: 1,
+  arcHeight: 0,
   arcTilt: 1,
   flowmapCurviness: 1,
   arcParticleBend: 0,
@@ -142,6 +160,45 @@ function colorSchemeFor(color: [number, number, number, number]): string[] {
     `rgba(${Math.round(red * 0.48)}, ${Math.round(green * 0.48)}, ${Math.round(blue * 0.48)}, 0.28)`
   ];
 }
+
+function buildGlobeSurfaceCells(): GlobeSurfaceCell[] {
+  const cells: GlobeSurfaceCell[] = [];
+  const step = 10;
+  for (let lat = -90; lat < 90; lat += step) {
+    for (let lon = -180; lon < 180; lon += step) {
+      cells.push({
+        id: `surface-${lon}-${lat}`,
+        polygon: [
+          [lon, lat],
+          [lon + step, lat],
+          [lon + step, lat + step],
+          [lon, lat + step]
+        ]
+      });
+    }
+  }
+  return cells;
+}
+
+function buildGlobeGridLines(): GlobeGridLine[] {
+  const lines: GlobeGridLine[] = [];
+  for (let lat = -75; lat <= 75; lat += 15) {
+    lines.push({
+      id: `parallel-${lat}`,
+      path: Array.from({length: 145}, (_, index) => [-180 + index * 2.5, lat, GLOBE_SURFACE_OFFSET_METERS] as Position3D)
+    });
+  }
+  for (let lon = -180; lon < 180; lon += 15) {
+    lines.push({
+      id: `meridian-${lon}`,
+      path: Array.from({length: 65}, (_, index) => [lon, -80 + index * 2.5, GLOBE_SURFACE_OFFSET_METERS] as Position3D)
+    });
+  }
+  return lines;
+}
+
+const GLOBE_SURFACE_CELLS = buildGlobeSurfaceCells();
+const GLOBE_GRID_LINES = buildGlobeGridLines();
 
 function legendLineWidth(ratio: number): number {
   return 1.4 + (11 - 1.4) * Math.sqrt(ratio);
@@ -196,6 +253,71 @@ function radiansToDegrees(value: number): number {
   return (value * 180) / Math.PI;
 }
 
+function vectorLength(vector: Vector3): number {
+  return Math.hypot(vector[0], vector[1], vector[2]);
+}
+
+function normalizeVector(vector: Vector3): Vector3 {
+  const length = vectorLength(vector);
+  return length > 0.000001 ? [vector[0] / length, vector[1] / length, vector[2] / length] : [0, 0, 1];
+}
+
+function crossVector(left: Vector3, right: Vector3): Vector3 {
+  return [
+    left[1] * right[2] - left[2] * right[1],
+    left[2] * right[0] - left[0] * right[2],
+    left[0] * right[1] - left[1] * right[0]
+  ];
+}
+
+function scaleVector(vector: Vector3, scale: number): Vector3 {
+  return [vector[0] * scale, vector[1] * scale, vector[2] * scale];
+}
+
+function addVectors(left: Vector3, right: Vector3): Vector3 {
+  return [left[0] + right[0], left[1] + right[1], left[2] + right[2]];
+}
+
+function lonLatToGlobeUnit(point: Point): Vector3 {
+  const lon = degreesToRadians(point[0]);
+  const lat = degreesToRadians(point[1]);
+  const cosLat = Math.cos(lat);
+  return [Math.sin(lon) * cosLat, -Math.cos(lon) * cosLat, Math.sin(lat)];
+}
+
+function globeUnitToLonLat(unit: Vector3): Point {
+  return [radiansToDegrees(Math.atan2(unit[0], -unit[1])), radiansToDegrees(Math.asin(Math.max(-1, Math.min(1, unit[2]))))];
+}
+
+function unwrapLongitudeNear(lon: number, referenceLon: number): number {
+  return referenceLon + shortestLongitudeDelta(referenceLon, lon);
+}
+
+function slerpUnitVector(source: Vector3, target: Vector3, t: number): Vector3 {
+  const dot = Math.max(-1, Math.min(1, source[0] * target[0] + source[1] * target[1] + source[2] * target[2]));
+  const omega = Math.acos(dot);
+  if (omega < 0.0001) return normalizeVector(addVectors(scaleVector(source, 1 - t), scaleVector(target, t)));
+  const sinOmega = Math.sin(omega);
+  return normalizeVector(addVectors(scaleVector(source, Math.sin((1 - t) * omega) / sinOmega), scaleVector(target, Math.sin(t * omega) / sinOmega)));
+}
+
+function globeRouteNormal(source: Point, target: Point): Vector3 {
+  const normal = crossVector(lonLatToGlobeUnit(source), lonLatToGlobeUnit(target));
+  if (vectorLength(normal) > 0.000001) return normalizeVector(normal);
+  const polarFallback = crossVector(lonLatToGlobeUnit(source), [0, 0, 1]);
+  if (vectorLength(polarFallback) > 0.000001) return normalizeVector(polarFallback);
+  return [1, 0, 0];
+}
+
+function globeRoutePoint(source: Point, target: Point, t: number): Point {
+  const unit = slerpUnitVector(lonLatToGlobeUnit(source), lonLatToGlobeUnit(target), t);
+  const [lon, lat] = globeUnitToLonLat(unit);
+  const referenceLon = source[0] + shortestLongitudeDelta(source[0], target[0]) * t;
+  const polarBlend = smoothstep(Math.max(0, Math.min(1, (Math.abs(lat) - 76) / 10)));
+  const stableLon = unwrapLongitudeNear(lon, referenceLon);
+  return [stableLon + shortestLongitudeDelta(stableLon, referenceLon) * polarBlend, lat];
+}
+
 function mercatorPixel(point: Point, zoom: number): Point {
   const scale = 512 * 2 ** zoom;
   const latitude = Math.max(-85.051129, Math.min(85.051129, point[1]));
@@ -240,6 +362,10 @@ function interpolateGreatCircle(source: Point, target: Point, t: number): Point 
   const y = sourceScale * sourceVector[1] + targetScale * targetVector[1];
   const z = sourceScale * sourceVector[2] + targetScale * targetVector[2];
   return [normalizeLongitude(radiansToDegrees(Math.atan2(y, x))), radiansToDegrees(Math.atan2(z, Math.hypot(x, y)))];
+}
+
+function interpolateGlobeRoute(source: Point, target: Point, t: number): Point {
+  return globeRoutePoint(source, target, t);
 }
 
 function blendRoutePoints(linear: Point, curved: Point, curveStrength: number): Point {
@@ -288,11 +414,12 @@ function bendPointAlongRoute(source: Point, target: Point, base: Point, t: numbe
   ];
 }
 
-function routeBasePoint(source: Point, target: Point, t: number, arcTrajectory: boolean, config: RenderConfig): Point {
-  if (!arcTrajectory) return interpolateLinear(source, target, t);
+function routeBasePoint(source: Point, target: Point, t: number, arcTrajectory: boolean, config: RenderConfig, globeMode = false): Point {
+  if (!arcTrajectory && !globeMode) return interpolateLinear(source, target, t);
   const linearBase = interpolateLinear(source, target, t);
-  const greatCircleBase = interpolateGreatCircle(source, target, t);
-  const blendedBase = blendRoutePoints(linearBase, greatCircleBase, config.arcCurve);
+  const greatCircleBase = globeMode ? interpolateGlobeRoute(source, target, t) : interpolateGreatCircle(source, target, t);
+  const blendedBase = globeMode ? greatCircleBase : blendRoutePoints(linearBase, greatCircleBase, config.arcCurve);
+  if (globeMode) return blendedBase;
   return config.showRoutes
     ? blendedBase
     : bendPointAlongRoute(source, target, blendedBase, t, config.arcParticleBend);
@@ -310,14 +437,14 @@ function tiltedRoutePoint(source: Point, target: Point, base: Point, t: number, 
   ];
 }
 
-function routeScreenLengthPixels(source: Point, target: Point, zoom: number, arcTrajectory: boolean, config: RenderConfig): number {
+function routeScreenLengthPixels(source: Point, target: Point, zoom: number, arcTrajectory: boolean, config: RenderConfig, globeMode = false): number {
   const samples = 14;
   const worldSize = 512 * 2 ** zoom;
   let length = 0;
-  let previous = mercatorPixel(routeBasePoint(source, target, 0, arcTrajectory, config), zoom);
+  let previous = mercatorPixel(routeBasePoint(source, target, 0, arcTrajectory, config, globeMode), zoom);
   for (let index = 1; index <= samples; index += 1) {
     const t = smoothstep(index / samples);
-    const current = mercatorPixel(routeBasePoint(source, target, t, arcTrajectory, config), zoom);
+    const current = mercatorPixel(routeBasePoint(source, target, t, arcTrajectory, config, globeMode), zoom);
     let deltaX = current[0] - previous[0];
     if (deltaX > worldSize / 2) deltaX -= worldSize;
     if (deltaX < -worldSize / 2) deltaX += worldSize;
@@ -359,8 +486,21 @@ function splitPathAtAntimeridian(flow: FlowRecord, path: Position3D[]): RoutePat
     .map((segment, index) => ({id: `${flow.id}-segment-${index}`, flow, path: segment}));
 }
 
-function buildRoutePaths(flow: FlowRecord, source: Point, target: Point, config: RenderConfig): RoutePath[] {
+function buildRoutePaths(flow: FlowRecord, source: Point, target: Point, config: RenderConfig, globeMode = false): RoutePath[] {
   const segments = 64;
+  if (globeMode) {
+    const path = Array.from({length: segments + 1}, (_, index) => {
+      const t = smoothstep(index / segments);
+      const base = globeRoutePoint(source, target, t);
+      return [
+        base[0],
+        base[1],
+        GLOBE_SURFACE_OFFSET_METERS + arcAltitudeMeters(source, target, t, arcHeightScale(flow, config))
+      ] as Position3D;
+    });
+    return [{id: `${flow.id}-globe`, flow, path}];
+  }
+
   const path = Array.from({length: segments + 1}, (_, index) => {
     const t = smoothstep(index / segments);
     const base = tiltedRoutePoint(source, target, routeBasePoint(source, target, t, true, config), t, config, flow.id);
@@ -454,15 +594,51 @@ function buildParticleSeeds(
   return particles;
 }
 
-function particlePosition(particle: ParticleSeed, renderTime: number, config: RenderConfig, arcTrajectory: boolean, offset = 0): Position3D {
+function particlePosition(
+  particle: ParticleSeed,
+  renderTime: number,
+  config: RenderConfig,
+  arcTrajectory: boolean,
+  globeMode = false,
+  offset = 0
+): Position3D {
   const routeSpeedScale = config.equalWorldSpeed
     ? SPEED_REFERENCE_ROUTE_METERS / Math.max(500_000, particle.routeDistanceMeters)
     : 1;
   const particleSpeed = 1 + (particle.speed - 0.5) * 1.28 * config.speedVariation;
   const rawT = ((particle.phase + renderTime * 0.035 * particleSpeed * config.speed * routeSpeedScale + offset) % 1 + 1) % 1;
-  const t = smoothstep(rawT);
-  const routeBase = routeBasePoint(particle.source, particle.target, t, arcTrajectory, config);
-  const base = arcTrajectory
+  const t = globeMode ? rawT : smoothstep(rawT);
+
+  if (globeMode) {
+    const sourceVector = lonLatToGlobeUnit(particle.source);
+    const targetVector = lonLatToGlobeUnit(particle.target);
+    const baseVector = slerpUnitVector(sourceVector, targetVector, t);
+    const normal = globeRouteNormal(particle.source, particle.target);
+    const [sourceLon, sourceLat] = particle.source;
+    const [targetLon, targetLat] = particle.target;
+    const deltaLon = shortestLongitudeDelta(sourceLon, targetLon);
+    const deltaLat = targetLat - sourceLat;
+    const distance = Math.max(1, Math.hypot(deltaLon, deltaLat));
+    const plumeStrength = Math.sin(Math.PI * t);
+    const plumeWidth = plumeDistanceWidth(distance, config.distanceWidthDamping) * plumeStrength;
+    const heightSpreadScale = 1 / (1 + plumeStrength * arcHeightScale(particle.flow, config) * config.altitudeWidthDamping);
+    const stableSpread = particle.lateral * config.plumeWidth;
+    const flutter = Math.sin(particle.wobble + renderTime * 0.55 * config.speed + t * Math.PI * 5) * 0.22 * config.jitter;
+    const lateralAngle = degreesToRadians(plumeWidth * (stableSpread + flutter) * heightSpreadScale);
+    const spreadVector = normalizeVector(
+      addVectors(scaleVector(baseVector, Math.cos(lateralAngle)), scaleVector(normal, Math.sin(lateralAngle)))
+    );
+    const reference = globeRoutePoint(particle.source, particle.target, t);
+    const [lon, lat] = globeUnitToLonLat(spreadVector);
+    return [
+      unwrapLongitudeNear(lon, reference[0]),
+      lat,
+      GLOBE_SURFACE_OFFSET_METERS * 1.35 + arcAltitudeMeters(particle.source, particle.target, t, arcHeightScale(particle.flow, config))
+    ];
+  }
+
+  const routeBase = routeBasePoint(particle.source, particle.target, t, arcTrajectory, config, globeMode);
+  const base = arcTrajectory && !globeMode
     ? tiltedRoutePoint(particle.source, particle.target, routeBase, t, config, particle.flow.id)
     : routeBase;
   const [sourceLon, sourceLat] = particle.source;
@@ -480,7 +656,9 @@ function particlePosition(particle: ParticleSeed, renderTime: number, config: Re
   const stableSpread = particle.lateral * config.plumeWidth;
   const flutter = Math.sin(particle.wobble + renderTime * 0.55 * config.speed + t * Math.PI * 5) * 0.22 * config.jitter;
   const lateralOffset = (stableSpread + flutter) * heightSpreadScale;
-  const altitude = arcTrajectory ? arcAltitudeMeters(particle.source, particle.target, t, arcHeightScale(particle.flow, config)) : 0;
+  const altitude =
+    (globeMode ? GLOBE_SURFACE_OFFSET_METERS * 1.35 : 0) +
+    (arcTrajectory || globeMode ? arcAltitudeMeters(particle.source, particle.target, t, arcHeightScale(particle.flow, config)) : 0);
   return [
     normalizeLongitude(base[0] + perpLon * plumeWidth * lateralOffset),
     base[1] + perpLat * plumeWidth * lateralOffset,
@@ -493,10 +671,11 @@ function buildParticleFrame(
   renderTime: number,
   mode: RenderMode,
   config: RenderConfig,
-  trailSpacingByFlow: Map<string, number>
+  trailSpacingByFlow: Map<string, number>,
+  globeMode = false
 ): ParticlePoint[] {
   const hasTrails = mode === 'particle-trails' || mode === 'particle-arc-trails';
-  const arcTrajectory = mode === 'particle-arc-plume' || mode === 'particle-arc-trails';
+  const arcTrajectory = globeMode || mode === 'particle-arc-plume' || mode === 'particle-arc-trails';
   const copies = hasTrails ? Math.max(1, Math.round(config.trailCopies)) : 1;
   return Array.from({length: copies}).flatMap((_, trailIndex) =>
     particles.map((particle) => {
@@ -504,7 +683,7 @@ function buildParticleFrame(
       return {
         id: `${particle.id}-${trailIndex}`,
         flow: particle.flow,
-        position: particlePosition(particle, renderTime, config, arcTrajectory, offset),
+        position: particlePosition(particle, renderTime, config, arcTrajectory, globeMode, offset),
         radius: Math.max(0.55, (particle.radius - trailIndex * 0.18) * config.particleSize),
         color: withAlpha(particle.flow.color, trailAlpha(trailIndex, copies, config.particleGlow))
       };
@@ -624,6 +803,7 @@ function MapStage({
   commodities,
   renderMode,
   renderConfig,
+  viewMode,
   onHoverInfo
 }: {
   payload: FlowmapPayload;
@@ -631,13 +811,17 @@ function MapStage({
   commodities: CommodityOption[];
   renderMode: RenderMode;
   renderConfig: RenderConfig;
+  viewMode: ViewMode;
   onHoverInfo: (value: HoverCard) => void;
 }) {
   const [mapModules, setMapModules] = useState<{
     DeckGL: any;
+    GlobeView: any;
+    ArcLayer: any;
     Map: any;
     FlowmapLayer: any;
     PathLayer: any;
+    PolygonLayer: any;
     ScatterplotLayer: any;
   } | null>(null);
   const [moduleError, setModuleError] = useState<string | null>(null);
@@ -649,17 +833,21 @@ function MapStage({
 
     Promise.all([
       import('@deck.gl/react'),
+      import('@deck.gl/core'),
       import('react-map-gl/maplibre'),
       import('@flowmap.gl/layers'),
       import('@deck.gl/layers')
     ])
-      .then(([deck, maplibre, flowmap, deckLayers]) => {
+      .then(([deck, deckCore, maplibre, flowmap, deckLayers]) => {
         if (cancelled) return;
         setMapModules({
           DeckGL: deck.DeckGL,
+          GlobeView: deckCore._GlobeView,
+          ArcLayer: deckLayers.ArcLayer,
           Map: maplibre.Map,
           FlowmapLayer: flowmap.FlowmapLayer,
           PathLayer: deckLayers.PathLayer,
+          PolygonLayer: deckLayers.PolygonLayer,
           ScatterplotLayer: deckLayers.ScatterplotLayer
         });
       })
@@ -695,23 +883,41 @@ function MapStage({
     [flows, locationsById, renderConfig.particleBudget, renderConfig.equalWorldSpeed]
   );
 
+  const globeMode = viewMode === 'globe';
+
   const routePaths = useMemo(
     () =>
       flows.flatMap((flow) => {
         const source = locationsById.get(flow.origin);
         const target = locationsById.get(flow.dest);
         return source && target
-          ? buildRoutePaths(flow, [source.lon, source.lat], [target.lon, target.lat], renderConfig)
+          ? buildRoutePaths(flow, [source.lon, source.lat], [target.lon, target.lat], renderConfig, globeMode)
           : [];
       }),
-    [flows, locationsById, renderConfig]
+    [flows, locationsById, renderConfig, globeMode]
+  );
+  const routeArcs = useMemo(
+    () =>
+      flows.flatMap((flow) => {
+        const source = locationsById.get(flow.origin);
+        const target = locationsById.get(flow.dest);
+        return source && target
+          ? [{
+              id: `${flow.id}-globe-arc`,
+              flow,
+              source: [source.lon, source.lat, GLOBE_SURFACE_OFFSET_METERS] as Position3D,
+              target: [target.lon, target.lat, GLOBE_SURFACE_OFFSET_METERS] as Position3D
+            }]
+          : [];
+      }),
+    [flows, locationsById]
   );
 
   const trailSpacingByFlow = useMemo(() => {
     const hasTrails = renderMode === 'particle-trails' || renderMode === 'particle-arc-trails';
     if (!hasTrails) return new globalThis.Map<string, number>();
 
-    const arcTrajectory = renderMode === 'particle-arc-trails';
+    const arcTrajectory = globeMode || renderMode === 'particle-arc-trails';
     const spacingPixels = renderConfig.trailSpacing * TRAIL_SPACING_PIXEL_SCALE;
     const offsets = new globalThis.Map<string, number>();
     for (const flow of flows) {
@@ -723,16 +929,17 @@ function MapStage({
         [target.lon, target.lat],
         viewZoom,
         arcTrajectory,
-        renderConfig
+        renderConfig,
+        globeMode
       );
       offsets.set(flow.id, Math.min(0.25, spacingPixels / routeLength));
     }
     return offsets;
-  }, [flows, locationsById, renderMode, renderConfig, viewZoom]);
+  }, [flows, locationsById, renderMode, renderConfig, viewZoom, globeMode]);
 
   const particleFrame = useMemo(
-    () => buildParticleFrame(particleSeeds, renderTime, renderMode, renderConfig, trailSpacingByFlow),
-    [particleSeeds, renderTime, renderMode, renderConfig, trailSpacingByFlow]
+    () => buildParticleFrame(particleSeeds, renderTime, renderMode, renderConfig, trailSpacingByFlow, globeMode),
+    [particleSeeds, renderTime, renderMode, renderConfig, trailSpacingByFlow, globeMode]
   );
   const endpointPoints = useMemo(() => {
     const endpoints = new globalThis.Map<string, EndpointPoint>();
@@ -744,13 +951,13 @@ function MapStage({
         endpoints.set(locationId, {
           id: locationId,
           name: location.name,
-          position: [location.lon, location.lat],
+          position: [location.lon, location.lat, globeMode ? GLOBE_SURFACE_OFFSET_METERS * 1.6 : 0],
           tonnes: (current?.tonnes ?? 0) + flow.count
         });
       }
     }
     return [...endpoints.values()];
-  }, [flows, locationsById]);
+  }, [flows, locationsById, globeMode]);
   const maxEndpointTonnes = endpointPoints.reduce((max, endpoint) => Math.max(max, endpoint.tonnes), 0);
 
   if (moduleError) {
@@ -772,7 +979,7 @@ function MapStage({
     );
   }
 
-  const {DeckGL, Map, FlowmapLayer, PathLayer, ScatterplotLayer} = mapModules;
+  const {DeckGL, GlobeView, ArcLayer, Map, FlowmapLayer, PathLayer, PolygonLayer, ScatterplotLayer} = mapModules;
   const flowsByCommodity = new globalThis.Map<string, FlowRecord[]>();
   for (const flow of flows) {
     flowsByCommodity.set(flow.commodityId, [...(flowsByCommodity.get(flow.commodityId) ?? []), flow]);
@@ -813,6 +1020,32 @@ function MapStage({
       });
     });
 
+  const globeSurfaceLayer = globeMode
+    ? new PolygonLayer({
+        id: 'globe-surface',
+        data: GLOBE_SURFACE_CELLS,
+        pickable: false,
+        stroked: false,
+        filled: true,
+        getPolygon: (cell: GlobeSurfaceCell) => cell.polygon,
+        getFillColor: [35, 49, 56, 255],
+        parameters: {depthTest: true}
+      })
+    : null;
+
+  const globeGridLayer = globeMode
+    ? new PathLayer({
+        id: 'globe-grid',
+        data: GLOBE_GRID_LINES,
+        pickable: false,
+        getPath: (line: GlobeGridLine) => line.path,
+        getColor: [246, 237, 216, 28],
+        getWidth: 1,
+        widthUnits: 'pixels',
+        parameters: {depthTest: true}
+      })
+    : null;
+
   const routeLayer = new PathLayer({
     id: 'commodity-route-paths',
     data: routePaths,
@@ -828,9 +1061,35 @@ function MapStage({
     capRounded: true,
     jointRounded: true,
     billboard: true,
-    parameters: {depthTest: false},
+    parameters: {depthTest: globeMode},
     onHover: (info: any) => {
       const route = info.object as RoutePath | undefined;
+      onHoverInfo(route ? {text: route.flow.tooltip, x: info.x ?? 0, y: info.y ?? 0} : null);
+    }
+  });
+
+  const globeRouteLayer = new ArcLayer({
+    id: 'commodity-globe-arcs',
+    data: routeArcs,
+    pickable: true,
+    greatCircle: true,
+    numSegments: 96,
+    getSourcePosition: (route: RouteArc) => route.source,
+    getTargetPosition: (route: RouteArc) => route.target,
+    getSourceColor: (route: RouteArc) =>
+      withAlpha(route.flow.color, (renderMode === 'static-arcs' ? 0.78 : 0.24) * renderConfig.routeOpacity * renderConfig.showRoutes),
+    getTargetColor: (route: RouteArc) =>
+      withAlpha(route.flow.color, (renderMode === 'static-arcs' ? 0.78 : 0.24) * renderConfig.routeOpacity * renderConfig.showRoutes),
+    getWidth: (route: RouteArc) =>
+      route.flow.lineWidth * (renderMode === 'static-arcs' ? 0.7 : 0.22) * renderConfig.routeWidth * ROUTE_WIDTH_METERS,
+    getHeight: (route: RouteArc) => arcHeightScale(route.flow, renderConfig),
+    getTilt: 0,
+    widthUnits: 'meters',
+    widthMinPixels: 0,
+    widthMaxPixels: Number.MAX_SAFE_INTEGER,
+    parameters: {depthTest: true},
+    onHover: (info: any) => {
+      const route = info.object as RouteArc | undefined;
       onHoverInfo(route ? {text: route.flow.tooltip, x: info.x ?? 0, y: info.y ?? 0} : null);
     }
   });
@@ -848,7 +1107,7 @@ function MapStage({
     getPosition: (particle: ParticlePoint) => particle.position,
     getRadius: (particle: ParticlePoint) => particle.radius,
     getFillColor: (particle: ParticlePoint) => particle.color,
-    parameters: {depthTest: false},
+    parameters: {depthTest: globeMode},
     updateTriggers: {
       getPosition: renderTime,
       getFillColor: renderTime
@@ -875,7 +1134,7 @@ function MapStage({
     getLineColor: [231, 184, 78, Math.min(255, Math.round(190 * renderConfig.endpointOpacity))],
     getLineWidth: 1.2,
     lineWidthUnits: 'pixels',
-    parameters: {depthTest: false},
+    parameters: {depthTest: globeMode},
     onHover: (info: any) => {
       const endpoint = info.object as EndpointPoint | undefined;
       onHoverInfo(
@@ -887,20 +1146,29 @@ function MapStage({
   });
 
   const layers =
-    renderMode === 'static-arcs'
-      ? [routeLayer, renderConfig.showEndpoints ? endpointLayer : null].filter(Boolean)
-      : isParticleRenderMode(renderMode)
-        ? [renderConfig.showRoutes ? routeLayer : null, particleLayer, renderConfig.showEndpoints ? endpointLayer : null].filter(Boolean)
-        : flowmapLayers().filter(Boolean);
+    globeMode
+      ? [
+          globeSurfaceLayer,
+          globeGridLayer,
+          renderMode === 'static-arcs' || renderConfig.showRoutes ? globeRouteLayer : null,
+          isParticleRenderMode(renderMode) ? particleLayer : null,
+          renderConfig.showEndpoints ? endpointLayer : null
+        ].filter(Boolean)
+      : renderMode === 'static-arcs'
+        ? [routeLayer, renderConfig.showEndpoints ? endpointLayer : null].filter(Boolean)
+        : isParticleRenderMode(renderMode)
+          ? [renderConfig.showRoutes ? routeLayer : null, particleLayer, renderConfig.showEndpoints ? endpointLayer : null].filter(Boolean)
+          : flowmapLayers().filter(Boolean);
 
   return (
     <DeckGL
-      initialViewState={INITIAL_VIEW_STATE}
-      controller={true}
+      views={globeMode ? new GlobeView({resolution: 3}) : undefined}
+      initialViewState={globeMode ? GLOBE_INITIAL_VIEW_STATE : INITIAL_VIEW_STATE}
+      controller={globeMode ? {dragMode: 'pan', scrollZoom: true, doubleClickZoom: true, touchZoom: true, inertia: true} : true}
       layers={layers}
       onViewStateChange={({viewState}: any) => setViewZoom(viewState.zoom)}
     >
-      <Map reuseMaps mapStyle={MAP_STYLE} />
+      {globeMode ? null : <Map reuseMaps mapStyle={MAP_STYLE} />}
     </DeckGL>
   );
 }
@@ -908,7 +1176,8 @@ function MapStage({
 function App() {
   const [payload, setPayload] = useState<FlowmapPayload | null>(null);
   const [activeCommodity, setActiveCommodity] = useState<string>('all');
-  const [renderMode, setRenderMode] = useState<RenderMode>('flowmap-straight');
+  const [viewMode, setViewMode] = useState<ViewMode>('globe');
+  const [renderMode, setRenderMode] = useState<RenderMode>('particle-arc-trails');
   const [renderConfig, setRenderConfig] = useState<RenderConfig>(DEFAULT_RENDER_CONFIG);
   const [hoverInfo, setHoverInfo] = useState<HoverCard>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -967,7 +1236,12 @@ function App() {
     width: legendLineWidth(ratio),
     label: selectedCommodity ? formatTonnes(selectedCommodity.maxQuantity * ratio) : ''
   }));
-  const isParticleMode = isParticleRenderMode(renderMode);
+  const globeMode = viewMode === 'globe';
+  const effectiveRenderMode =
+    globeMode && (renderMode === 'flowmap-straight' || renderMode === 'flowmap-curved')
+      ? 'static-arcs'
+      : renderMode;
+  const isParticleMode = isParticleRenderMode(effectiveRenderMode);
   const particleMass = isParticleMode
     ? estimateUniformParticleMass(filteredFlows, locationsById, renderConfig.particleBudget, Boolean(renderConfig.equalWorldSpeed))
     : null;
@@ -986,6 +1260,12 @@ function App() {
   const updateRenderConfig = (key: keyof RenderConfig, value: number) => {
     setRenderConfig((current) => ({...current, [key]: value}));
   };
+  const updateViewMode = (nextViewMode: ViewMode) => {
+    setViewMode(nextViewMode);
+    if (nextViewMode === 'globe' && (renderMode === 'flowmap-straight' || renderMode === 'flowmap-curved')) {
+      setRenderMode('static-arcs');
+    }
+  };
 
   return (
     <main className="atlas">
@@ -993,8 +1273,9 @@ function App() {
         payload={payload}
         flows={filteredFlows}
         commodities={visibleCommodities}
-        renderMode={renderMode}
+        renderMode={effectiveRenderMode}
         renderConfig={renderConfig}
+        viewMode={viewMode}
         onHoverInfo={setHoverInfo}
       />
 
@@ -1023,6 +1304,18 @@ function App() {
             ))}
           </select>
 
+          <label className="select-label" htmlFor="view-mode">
+            Projection
+          </label>
+          <select
+            id="view-mode"
+            value={viewMode}
+            onChange={(event) => updateViewMode(event.target.value as ViewMode)}
+          >
+            <option value="globe">Globe · free rotate</option>
+            <option value="map">Flat map · Web Mercator</option>
+          </select>
+
           <label className="select-label" htmlFor="render-mode">
             Render mode
           </label>
@@ -1031,8 +1324,8 @@ function App() {
             value={renderMode}
             onChange={(event) => setRenderMode(event.target.value as RenderMode)}
           >
-            <option value="flowmap-straight">Flowmap · animated straight</option>
-            <option value="flowmap-curved">Flowmap · small curves</option>
+            {globeMode ? null : <option value="flowmap-straight">Flowmap · animated straight</option>}
+            {globeMode ? null : <option value="flowmap-curved">Flowmap · small curves</option>}
             <option value="static-arcs">deck.gl · static arcs</option>
             <option value="particle-plume">Particles · plume dots</option>
             <option value="particle-trails">Particles · smoky trails</option>
@@ -1042,7 +1335,7 @@ function App() {
 
         </div>
 
-        <details className="tuning-card" open={isParticleMode || renderMode === 'static-arcs' || renderMode === 'flowmap-curved'}>
+        <details className="tuning-card" open={isParticleMode || effectiveRenderMode === 'static-arcs' || effectiveRenderMode === 'flowmap-curved'}>
           <summary>Render tuning</summary>
           <div className="range-grid">
             {isParticleMode ? (
@@ -1157,15 +1450,17 @@ function App() {
                   displayValue={`${Math.round(renderConfig.trailSpacing * TRAIL_SPACING_PIXEL_SCALE)} px`}
                   onChange={(value) => updateRenderConfig('trailSpacing', value)}
                 />
-                <RangeControl
-                  id="arc-particle-bend"
-                  label="Hidden-route arc bend"
-                  min={0}
-                  max={2.5}
-                  step={0.05}
-                  value={renderConfig.arcParticleBend}
-                  onChange={(value) => updateRenderConfig('arcParticleBend', value)}
-                />
+                {globeMode ? null : (
+                  <RangeControl
+                    id="arc-particle-bend"
+                    label="Hidden-route arc bend"
+                    min={0}
+                    max={2.5}
+                    step={0.05}
+                    value={renderConfig.arcParticleBend}
+                    onChange={(value) => updateRenderConfig('arcParticleBend', value)}
+                  />
+                )}
                 <button
                   className="ghost-button inline-toggle"
                   type="button"
@@ -1176,7 +1471,7 @@ function App() {
               </>
             ) : null}
 
-            {renderMode === 'static-arcs' || isParticleMode ? (
+            {effectiveRenderMode === 'static-arcs' || isParticleMode ? (
               <>
                 <RangeControl
                   id="route-opacity"
@@ -1191,20 +1486,22 @@ function App() {
                   id="route-width"
                   label="Route width"
                   min={0}
-                  max={10}
+                  max={20}
                   step={0.05}
                   value={renderConfig.routeWidth}
                   onChange={(value) => updateRenderConfig('routeWidth', value)}
                 />
-                <RangeControl
-                  id="arc-curve"
-                  label="Arc curve"
-                  min={0}
-                  max={1}
-                  step={0.02}
-                  value={renderConfig.arcCurve}
-                  onChange={(value) => updateRenderConfig('arcCurve', value)}
-                />
+                {globeMode ? null : (
+                  <RangeControl
+                    id="arc-curve"
+                    label="Arc curve"
+                    min={0}
+                    max={1}
+                    step={0.02}
+                    value={renderConfig.arcCurve}
+                    onChange={(value) => updateRenderConfig('arcCurve', value)}
+                  />
+                )}
                 <RangeControl
                   id="arc-height"
                   label="Arc height"
@@ -1214,15 +1511,17 @@ function App() {
                   value={renderConfig.arcHeight}
                   onChange={(value) => updateRenderConfig('arcHeight', value)}
                 />
-                <RangeControl
-                  id="arc-tilt"
-                  label="Arc tilt"
-                  min={0}
-                  max={3}
-                  step={0.05}
-                  value={renderConfig.arcTilt}
-                  onChange={(value) => updateRenderConfig('arcTilt', value)}
-                />
+                {globeMode ? null : (
+                  <RangeControl
+                    id="arc-tilt"
+                    label="Arc tilt"
+                    min={0}
+                    max={3}
+                    step={0.05}
+                    value={renderConfig.arcTilt}
+                    onChange={(value) => updateRenderConfig('arcTilt', value)}
+                  />
+                )}
                 <button
                   className="ghost-button inline-toggle"
                   type="button"
@@ -1252,7 +1551,7 @@ function App() {
               </>
             ) : null}
 
-            {renderMode === 'flowmap-curved' ? (
+            {effectiveRenderMode === 'flowmap-curved' ? (
               <RangeControl
                 id="flowmap-curviness"
                 label="Flowmap curviness"
