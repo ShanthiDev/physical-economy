@@ -78,9 +78,9 @@ type RoutePath = {
 const DEFAULT_RENDER_CONFIG: RenderConfig = {
   particleBudget: 70000,
   speed: 1,
-  plumeWidth: 1,
-  distanceWidthDamping: 0.45,
-  altitudeWidthDamping: 1,
+  plumeWidth: 3,
+  distanceWidthDamping: 1,
+  altitudeWidthDamping: 0.85,
   jitter: 0.3,
   particleSize: 1,
   particleGlow: 0.72,
@@ -95,7 +95,7 @@ const DEFAULT_RENDER_CONFIG: RenderConfig = {
   arcParticleBend: 0,
   showRoutes: 1,
   showEndpoints: 1,
-  endpointSize: 2,
+  endpointSize: 5,
   endpointOpacity: 0.62
 };
 
@@ -1012,7 +1012,7 @@ function App() {
                   id="plume-width"
                   label="Plume width"
                   min={0}
-                  max={3}
+                  max={5}
                   step={0.05}
                   value={renderConfig.plumeWidth}
                   onChange={(value) => updateRenderConfig('plumeWidth', value)}
@@ -1021,7 +1021,7 @@ function App() {
                   id="distance-width-damping"
                   label="Distance width damping"
                   min={0}
-                  max={1}
+                  max={2}
                   step={0.02}
                   value={renderConfig.distanceWidthDamping}
                   onChange={(value) => updateRenderConfig('distanceWidthDamping', value)}
