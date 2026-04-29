@@ -6,6 +6,8 @@ import type {CommodityOption, FlowRecord, FlowmapPayload} from './types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
 const INITIAL_VIEW_STATE = {longitude: 18, latitude: 22, zoom: 1.22, pitch: 0, bearing: 0};
+const EARTH_RADIUS_METERS = 6_371_000;
+const SPEED_REFERENCE_ROUTE_METERS = 4_000_000;
 const ROUTE_WIDTH_METERS = 65_000;
 const TRAIL_SPACING_PIXEL_SCALE = 10;
 const UNIFORM_PLUME_WIDTH_DEGREES = 0.9;
@@ -24,6 +26,8 @@ type Position3D = [number, number, number];
 type RenderConfig = {
   particleBudget: number;
   speed: number;
+  speedVariation: number;
+  equalWorldSpeed: number;
   plumeWidth: number;
   distanceWidthDamping: number;
   altitudeWidthDamping: number;
@@ -55,6 +59,7 @@ type ParticleSeed = {
   wobble: number;
   radius: number;
   massTonnes: number;
+  routeDistanceMeters: number;
 };
 type ParticlePoint = {
   id: string;
@@ -74,10 +79,19 @@ type RoutePath = {
   flow: FlowRecord;
   path: Position3D[];
 };
+type FlowParticlePlan = {
+  flow: FlowRecord;
+  source: Point;
+  target: Point;
+  routeDistanceMeters: number;
+  weight: number;
+};
 
 const DEFAULT_RENDER_CONFIG: RenderConfig = {
-  particleBudget: 70000,
+  particleBudget: 20000,
   speed: 1,
+  speedVariation: 0.3,
+  equalWorldSpeed: 1,
   plumeWidth: 3,
   distanceWidthDamping: 1,
   altitudeWidthDamping: 0.85,
@@ -192,10 +206,6 @@ function mercatorPixel(point: Point, zoom: number): Point {
   ];
 }
 
-function particleBudgetToPerFlow(particleBudget: number): number {
-  return Math.max(12, Math.round(Math.sqrt(particleBudget) * 2.7));
-}
-
 function interpolateLinear(source: Point, target: Point, t: number): Point {
   const [sourceLon, sourceLat] = source;
   const [targetLon, targetLat] = target;
@@ -252,8 +262,7 @@ function angularDistanceRadians(source: Point, target: Point): number {
 }
 
 function arcAltitudeMeters(source: Point, target: Point, t: number, arcHeight: number): number {
-  const earthRadiusMeters = 6_371_000;
-  const distance = angularDistanceRadians(source, target) * earthRadiusMeters;
+  const distance = angularDistanceRadians(source, target) * EARTH_RADIUS_METERS;
   return Math.sqrt(Math.max(0, t * (1 - t))) * distance * arcHeight;
 }
 
@@ -287,6 +296,18 @@ function routeBasePoint(source: Point, target: Point, t: number, arcTrajectory: 
   return config.showRoutes
     ? blendedBase
     : bendPointAlongRoute(source, target, blendedBase, t, config.arcParticleBend);
+}
+
+function tiltedRoutePoint(source: Point, target: Point, base: Point, t: number, config: RenderConfig, seed: string): Point {
+  if (!config.arcTilt) return base;
+  const deltaLon = shortestLongitudeDelta(source[0], target[0]);
+  const deltaLat = target[1] - source[1];
+  const distance = Math.max(1, Math.hypot(deltaLon, deltaLat));
+  const tilt = (random01(`${seed}:tilt`) - 0.5) * Math.min(8, distance * 0.024) * Math.sin(Math.PI * t) * config.arcTilt;
+  return [
+    normalizeLongitude(base[0] + (-deltaLat / distance) * tilt),
+    base[1] + (deltaLon / distance) * tilt
+  ];
 }
 
 function routeScreenLengthPixels(source: Point, target: Point, zoom: number, arcTrajectory: boolean, config: RenderConfig): number {
@@ -342,7 +363,7 @@ function buildRoutePaths(flow: FlowRecord, source: Point, target: Point, config:
   const segments = 64;
   const path = Array.from({length: segments + 1}, (_, index) => {
     const t = smoothstep(index / segments);
-    const base = routeBasePoint(source, target, t, true, config);
+    const base = tiltedRoutePoint(source, target, routeBasePoint(source, target, t, true, config), t, config, flow.id);
     return [
       base[0],
       base[1],
@@ -377,49 +398,56 @@ function resolvePickingText(info: any, flows: FlowRecord[]): string | null {
   return null;
 }
 
-function estimateParticleCount(flow: FlowRecord, commodityMax: number, particleBudget: number): number {
-  const perFlowBudget = particleBudgetToPerFlow(particleBudget);
-  const ratio = commodityMax > 0 ? Math.sqrt(flow.count / commodityMax) : 0;
-  return Math.max(1, Math.min(perFlowBudget, Math.round(4 + ratio * perFlowBudget)));
-}
-
 function buildParticleSeeds(
   flows: FlowRecord[],
   locationsById: Map<string, {lon: number; lat: number; name?: string}>,
-  particleBudget: number
+  particleBudget: number,
+  equalWorldSpeed: boolean
 ): ParticleSeed[] {
   const globalBudget = Math.round(particleBudget);
-  const maxByCommodity = new Map<string, number>();
+  const plans: FlowParticlePlan[] = [];
   for (const flow of flows) {
-    maxByCommodity.set(flow.commodityId, Math.max(maxByCommodity.get(flow.commodityId) ?? 0, flow.count));
-  }
-
-  const particles: ParticleSeed[] = [];
-  const sortedFlows = [...flows].sort((left, right) => right.count - left.count);
-  for (const flow of sortedFlows) {
-    if (particles.length >= globalBudget) break;
     const source = locationsById.get(flow.origin);
     const target = locationsById.get(flow.dest);
     if (!source || !target) continue;
+    const routeDistanceMeters = Math.max(
+      1,
+      angularDistanceRadians([source.lon, source.lat], [target.lon, target.lat]) * EARTH_RADIUS_METERS
+    );
+    plans.push({
+      flow,
+      source: [source.lon, source.lat],
+      target: [target.lon, target.lat],
+      routeDistanceMeters,
+      weight: particleAllocationWeight(flow, routeDistanceMeters, equalWorldSpeed)
+    });
+  }
 
+  const sortedPlans = plans.sort((left, right) => right.weight - left.weight);
+  const totalWeight = sortedPlans.reduce((sum, plan) => sum + plan.weight, 0);
+  const massTonnes = estimateParticleMassFromWeight(totalWeight, globalBudget) ?? 0;
+
+  const particles: ParticleSeed[] = [];
+  for (const plan of sortedPlans) {
+    if (particles.length >= globalBudget) break;
     const count = Math.min(
-      estimateParticleCount(flow, maxByCommodity.get(flow.commodityId) ?? flow.count, particleBudget),
+      Math.max(1, Math.round((plan.weight / Math.max(1, totalWeight)) * globalBudget)),
       globalBudget - particles.length
     );
-    const massTonnes = flow.count / count;
     for (let index = 0; index < count; index += 1) {
-      const seed = `${flow.id}:${index}`;
+      const seed = `${plan.flow.id}:${index}`;
       particles.push({
-        id: `${flow.id}-${index}`,
-        flow,
-        source: [source.lon, source.lat],
-        target: [target.lon, target.lat],
+        id: `${plan.flow.id}-${index}`,
+        flow: plan.flow,
+        source: plan.source,
+        target: plan.target,
         phase: random01(`${seed}:phase`),
-        speed: 0.72 + random01(`${seed}:speed`) * 0.64,
+        speed: random01(`${seed}:speed`),
         lateral: (random01(`${seed}:lat`) - 0.5) * 2,
         wobble: random01(`${seed}:wobble`) * Math.PI * 2,
         radius: 1.15 + random01(`${seed}:radius`) * 1.25,
-        massTonnes
+        massTonnes,
+        routeDistanceMeters: plan.routeDistanceMeters
       });
     }
   }
@@ -427,9 +455,16 @@ function buildParticleSeeds(
 }
 
 function particlePosition(particle: ParticleSeed, renderTime: number, config: RenderConfig, arcTrajectory: boolean, offset = 0): Position3D {
-  const rawT = ((particle.phase + renderTime * 0.035 * particle.speed * config.speed + offset) % 1 + 1) % 1;
+  const routeSpeedScale = config.equalWorldSpeed
+    ? SPEED_REFERENCE_ROUTE_METERS / Math.max(500_000, particle.routeDistanceMeters)
+    : 1;
+  const particleSpeed = 1 + (particle.speed - 0.5) * 1.28 * config.speedVariation;
+  const rawT = ((particle.phase + renderTime * 0.035 * particleSpeed * config.speed * routeSpeedScale + offset) % 1 + 1) % 1;
   const t = smoothstep(rawT);
-  const base = routeBasePoint(particle.source, particle.target, t, arcTrajectory, config);
+  const routeBase = routeBasePoint(particle.source, particle.target, t, arcTrajectory, config);
+  const base = arcTrajectory
+    ? tiltedRoutePoint(particle.source, particle.target, routeBase, t, config, particle.flow.id)
+    : routeBase;
   const [sourceLon, sourceLat] = particle.source;
   const [targetLon, targetLat] = particle.target;
   const deltaLon = shortestLongitudeDelta(sourceLon, targetLon);
@@ -477,15 +512,34 @@ function buildParticleFrame(
   );
 }
 
-function estimateParticleMass(flows: FlowRecord[], particleBudget: number, selectedCommodity: CommodityOption | null): number | null {
-  const relevantFlows = selectedCommodity ? flows.filter((flow) => flow.commodityId === selectedCommodity.id) : flows;
-  const maxFlow = relevantFlows.reduce<FlowRecord | null>(
-    (current, flow) => (!current || flow.count > current.count ? flow : current),
-    null
-  );
-  if (!maxFlow) return null;
-  const commodityMax = selectedCommodity?.maxQuantity ?? maxFlow.commodityMax ?? maxFlow.count;
-  return maxFlow.count / estimateParticleCount(maxFlow, commodityMax, particleBudget);
+function particleAllocationWeight(flow: FlowRecord, routeDistanceMeters: number, equalWorldSpeed: boolean): number {
+  const durationScale = equalWorldSpeed ? routeDistanceMeters / SPEED_REFERENCE_ROUTE_METERS : 1;
+  return flow.count * durationScale;
+}
+
+function estimateParticleMassFromWeight(totalWeight: number, particleBudget: number): number | null {
+  if (!totalWeight || particleBudget <= 0) return null;
+  return totalWeight / particleBudget;
+}
+
+function estimateUniformParticleMass(
+  flows: FlowRecord[],
+  locationsById: Map<string, {lon: number; lat: number; name?: string}>,
+  particleBudget: number,
+  equalWorldSpeed: boolean
+): number | null {
+  const totalWeight = flows.reduce((sum, flow) => {
+    const source = locationsById.get(flow.origin);
+    const target = locationsById.get(flow.dest);
+    if (!source || !target) return sum;
+    const routeDistanceMeters = Math.max(
+      1,
+      angularDistanceRadians([source.lon, source.lat], [target.lon, target.lat]) * EARTH_RADIUS_METERS
+    );
+    return sum + particleAllocationWeight(flow, routeDistanceMeters, equalWorldSpeed);
+  }, 0);
+
+  return estimateParticleMassFromWeight(totalWeight, Math.round(particleBudget));
 }
 
 function RangeControl({
@@ -637,8 +691,8 @@ function MapStage({
   );
 
   const particleSeeds = useMemo(
-    () => buildParticleSeeds(flows, locationsById, renderConfig.particleBudget),
-    [flows, locationsById, renderConfig.particleBudget]
+    () => buildParticleSeeds(flows, locationsById, renderConfig.particleBudget, Boolean(renderConfig.equalWorldSpeed)),
+    [flows, locationsById, renderConfig.particleBudget, renderConfig.equalWorldSpeed]
   );
 
   const routePaths = useMemo(
@@ -895,6 +949,9 @@ function App() {
     activeCommodity === 'all'
       ? payload.flows
       : payload.flows.filter((flow) => flow.commodityId === activeCommodity);
+  const locationsById = new globalThis.Map(
+    payload.locations.map((location) => [location.id, {lon: location.lon, lat: location.lat, name: location.name}])
+  );
 
   const totalTonnes = filteredFlows.reduce((sum, flow) => sum + flow.count, 0);
   const maxFlow = filteredFlows.reduce<FlowRecord | null>(
@@ -910,21 +967,22 @@ function App() {
     width: legendLineWidth(ratio),
     label: selectedCommodity ? formatTonnes(selectedCommodity.maxQuantity * ratio) : ''
   }));
-  const particleMass = estimateParticleMass(filteredFlows, renderConfig.particleBudget, selectedCommodity);
   const isParticleMode = isParticleRenderMode(renderMode);
-  const particleMasses = isParticleMode
-    ? visibleCommodities
-        .map((commodity) => estimateParticleMass(filteredFlows, renderConfig.particleBudget, commodity))
-        .filter((mass): mass is number => mass !== null && Number.isFinite(mass))
-    : [];
+  const particleMass = isParticleMode
+    ? estimateUniformParticleMass(filteredFlows, locationsById, renderConfig.particleBudget, Boolean(renderConfig.equalWorldSpeed))
+    : null;
   const particleBudgetLabel = Math.round(renderConfig.particleBudget).toLocaleString('en-US');
-  const particleUnitText = !isParticleMode
-    ? null
-    : selectedCommodity && particleMass
-      ? `One dot on the largest visible ${selectedCommodity.name} flow represents about ${formatTonnes(particleMass)}; budget ${particleBudgetLabel} dots.`
-      : particleMasses.length
-        ? `One dot on the largest visible flow per commodity represents about ${formatTonnes(Math.min(...particleMasses))} to ${formatTonnes(Math.max(...particleMasses))}; budget ${particleBudgetLabel} dots.`
-        : null;
+  const particleUnitText =
+    isParticleMode && particleMass
+      ? `One dot represents about ${formatTonnes(particleMass)}${selectedCommodity ? ` of ${selectedCommodity.name}` : ''}; budget ${particleBudgetLabel} dots.`
+      : null;
+  const particleDotColor: [number, number, number, number] =
+    selectedCommodity?.color ?? visibleCommodities[0]?.color ?? [246, 237, 216, 220];
+  const legendSubhead = isParticleMode
+    ? 'Dot-Einheit'
+    : activeCommodity === 'all'
+      ? 'max. sichtbarer Strom je Commodity'
+      : 'Linienstärke dieser Commodity';
   const updateRenderConfig = (key: keyof RenderConfig, value: number) => {
     setRenderConfig((current) => ({...current, [key]: value}));
   };
@@ -1008,6 +1066,22 @@ function App() {
                   value={renderConfig.speed}
                   onChange={(value) => updateRenderConfig('speed', value)}
                 />
+                <RangeControl
+                  id="speed-variation"
+                  label="Speed variation"
+                  min={0}
+                  max={1}
+                  step={0.02}
+                  value={renderConfig.speedVariation}
+                  onChange={(value) => updateRenderConfig('speedVariation', value)}
+                />
+                <button
+                  className="ghost-button inline-toggle"
+                  type="button"
+                  onClick={() => updateRenderConfig('equalWorldSpeed', renderConfig.equalWorldSpeed ? 0 : 1)}
+                >
+                  {renderConfig.equalWorldSpeed ? 'Travel timing: equal world speed' : 'Travel timing: equal duration'}
+                </button>
                 <RangeControl
                   id="plume-width"
                   label="Plume width"
@@ -1213,12 +1287,17 @@ function App() {
         <section className="legend-card" aria-label="Commodity legend">
           <div className="legend-header">
             <span>Legende</span>
-            <small>{activeCommodity === 'all' ? 'max. sichtbarer Strom je Commodity' : 'Linienstärke dieser Commodity'}</small>
+            <small>{legendSubhead}</small>
           </div>
 
-          {particleUnitText ? <p className="particle-note particle-unit">{particleUnitText}</p> : null}
+          {particleUnitText ? (
+            <div className="particle-unit-row">
+              <span className="particle-unit-dot" style={{background: colorToCss(particleDotColor), color: colorToCss(particleDotColor)}} />
+              <span>{particleUnitText}</span>
+            </div>
+          ) : null}
 
-          {selectedCommodity ? (
+          {selectedCommodity && !isParticleMode ? (
             <div className="thickness-legend">
               {legendSamples.map((sample) => (
                 <div className="thickness-row" key={sample.ratio}>
@@ -1233,7 +1312,7 @@ function App() {
                 </div>
               ))}
             </div>
-          ) : (
+          ) : !selectedCommodity ? (
             <div className="commodity-legend">
               {payload.commodities.map((commodity) => (
                 <div className="commodity-legend-row" key={commodity.id}>
@@ -1243,7 +1322,7 @@ function App() {
                 </div>
               ))}
             </div>
-          )}
+          ) : null}
         </section>
       </section>
 

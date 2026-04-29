@@ -386,6 +386,26 @@ input[type="range"] {
   box-shadow: 0 0 18px currentColor;
 }
 
+.particle-unit-row {
+  display: grid;
+  grid-template-columns: 0.8rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: center;
+  margin: -0.1rem 0 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(246, 237, 216, 0.11);
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.particle-unit-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  box-shadow: 0 0 18px currentColor;
+}
+
 .particle-note {
   margin: 0.15rem 0 0;
   padding-top: 0.65rem;
