@@ -12,6 +12,8 @@ const SPEED_REFERENCE_ROUTE_METERS = 4_000_000;
 const ROUTE_WIDTH_METERS = 65_000;
 const TRAIL_SPACING_PIXEL_SCALE = 10;
 const UNIFORM_PLUME_WIDTH_DEGREES = 0.9;
+const COUNTRY_GEOJSON_URL = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson';
+const GLOBE_OCEAN_OFFSET_METERS = -12_000;
 const GLOBE_SURFACE_OFFSET_METERS = 18_000;
 const rootElement = document.getElementById('root');
 type HoverCard = {text: string; x: number; y: number} | null;
@@ -98,7 +100,7 @@ type FlowParticlePlan = {
 };
 type GlobeSurfaceCell = {
   id: string;
-  polygon: Point[];
+  polygon: Position3D[];
 };
 type GlobeGridLine = {
   id: string;
@@ -169,10 +171,10 @@ function buildGlobeSurfaceCells(): GlobeSurfaceCell[] {
       cells.push({
         id: `surface-${lon}-${lat}`,
         polygon: [
-          [lon, lat],
-          [lon + step, lat],
-          [lon + step, lat + step],
-          [lon, lat + step]
+          [lon, lat, GLOBE_OCEAN_OFFSET_METERS],
+          [lon + step, lat, GLOBE_OCEAN_OFFSET_METERS],
+          [lon + step, lat + step, GLOBE_OCEAN_OFFSET_METERS],
+          [lon, lat + step, GLOBE_OCEAN_OFFSET_METERS]
         ]
       });
     }
@@ -818,6 +820,7 @@ function MapStage({
     DeckGL: any;
     GlobeView: any;
     ArcLayer: any;
+    GeoJsonLayer: any;
     Map: any;
     FlowmapLayer: any;
     PathLayer: any;
@@ -844,6 +847,7 @@ function MapStage({
           DeckGL: deck.DeckGL,
           GlobeView: deckCore._GlobeView,
           ArcLayer: deckLayers.ArcLayer,
+          GeoJsonLayer: deckLayers.GeoJsonLayer,
           Map: maplibre.Map,
           FlowmapLayer: flowmap.FlowmapLayer,
           PathLayer: deckLayers.PathLayer,
@@ -979,7 +983,7 @@ function MapStage({
     );
   }
 
-  const {DeckGL, GlobeView, ArcLayer, Map, FlowmapLayer, PathLayer, PolygonLayer, ScatterplotLayer} = mapModules;
+  const {DeckGL, GlobeView, ArcLayer, GeoJsonLayer, Map, FlowmapLayer, PathLayer, PolygonLayer, ScatterplotLayer} = mapModules;
   const flowsByCommodity = new globalThis.Map<string, FlowRecord[]>();
   for (const flow of flows) {
     flowsByCommodity.set(flow.commodityId, [...(flowsByCommodity.get(flow.commodityId) ?? []), flow]);
@@ -1030,6 +1034,30 @@ function MapStage({
         getPolygon: (cell: GlobeSurfaceCell) => cell.polygon,
         getFillColor: [35, 49, 56, 255],
         parameters: {depthTest: true}
+      })
+    : null;
+
+  const globeCountryLayer = globeMode
+    ? new GeoJsonLayer({
+        id: 'globe-countries',
+        data: COUNTRY_GEOJSON_URL,
+        pickable: true,
+        stroked: true,
+        filled: true,
+        lineBillboard: true,
+        lineCapRounded: true,
+        lineJointRounded: true,
+        lineWidthUnits: 'pixels',
+        lineWidthMinPixels: 0.45,
+        lineWidthMaxPixels: 1.15,
+        getFillColor: [31, 47, 39, 214],
+        getLineColor: [246, 237, 216, 72],
+        getLineWidth: 0.7,
+        parameters: {depthTest: true},
+        onHover: (info: any) => {
+          const properties = info.object?.properties;
+          onHoverInfo(properties?.NAME ? {text: properties.NAME, x: info.x ?? 0, y: info.y ?? 0} : null);
+        }
       })
     : null;
 
@@ -1149,6 +1177,7 @@ function MapStage({
     globeMode
       ? [
           globeSurfaceLayer,
+          globeCountryLayer,
           globeGridLayer,
           renderMode === 'static-arcs' || renderConfig.showRoutes ? globeRouteLayer : null,
           isParticleRenderMode(renderMode) ? particleLayer : null,
