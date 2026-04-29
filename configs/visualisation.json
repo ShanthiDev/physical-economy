@@ -6,9 +6,9 @@
   "min_render_line_width": 1.4,
   "max_render_line_width": 11.0,
   "commodity_colors": {
-    "hard_coal": "rgba(54, 50, 45, 0.84)",
-    "crude_oil": "rgba(21, 20, 18, 0.86)",
-    "refined_petroleum": "rgba(79, 86, 92, 0.82)",
+    "hard_coal": "rgba(168, 150, 116, 0.9)",
+    "crude_oil": "rgba(190, 188, 170, 0.9)",
+    "refined_petroleum": "rgba(152, 179, 197, 0.88)",
     "natural_gas": "rgba(83, 174, 218, 0.78)",
     "electricity": "rgba(255, 219, 88, 0.86)",
     "wheat": "rgba(219, 174, 77, 0.86)",

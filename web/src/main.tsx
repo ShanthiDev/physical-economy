@@ -5,6 +5,10 @@ import './styles.css';
 import type {CommodityOption, FlowRecord, FlowmapPayload} from './types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+const INITIAL_VIEW_STATE = {longitude: 18, latitude: 22, zoom: 1.22, pitch: 0, bearing: 0};
+const ROUTE_WIDTH_METERS = 65_000;
+const TRAIL_SPACING_PIXEL_SCALE = 10;
+const UNIFORM_PLUME_WIDTH_DEGREES = 0.9;
 const rootElement = document.getElementById('root');
 type HoverCard = {text: string; x: number; y: number} | null;
 type RenderMode =
@@ -21,6 +25,8 @@ type RenderConfig = {
   particleBudget: number;
   speed: number;
   plumeWidth: number;
+  distanceWidthDamping: number;
+  altitudeWidthDamping: number;
   jitter: number;
   particleSize: number;
   particleGlow: number;
@@ -28,11 +34,15 @@ type RenderConfig = {
   trailSpacing: number;
   routeOpacity: number;
   routeWidth: number;
+  arcCurve: number;
   arcHeight: number;
   arcTilt: number;
   flowmapCurviness: number;
   arcParticleBend: number;
   showRoutes: number;
+  showEndpoints: number;
+  endpointSize: number;
+  endpointOpacity: number;
 };
 type ParticleSeed = {
   id: string;
@@ -59,23 +69,34 @@ type EndpointPoint = {
   position: Point;
   tonnes: number;
 };
+type RoutePath = {
+  id: string;
+  flow: FlowRecord;
+  path: Position3D[];
+};
 
 const DEFAULT_RENDER_CONFIG: RenderConfig = {
-  particleBudget: 18000,
+  particleBudget: 70000,
   speed: 1,
   plumeWidth: 1,
-  jitter: 1,
+  distanceWidthDamping: 0.45,
+  altitudeWidthDamping: 1,
+  jitter: 0.3,
   particleSize: 1,
   particleGlow: 0.72,
   trailCopies: 3,
-  trailSpacing: 1,
-  routeOpacity: 1,
-  routeWidth: 1,
+  trailSpacing: 0.2,
+  routeOpacity: 0.4,
+  routeWidth: 3,
+  arcCurve: 1,
   arcHeight: 1,
   arcTilt: 1,
   flowmapCurviness: 1,
   arcParticleBend: 0,
-  showRoutes: 1
+  showRoutes: 1,
+  showEndpoints: 1,
+  endpointSize: 2,
+  endpointOpacity: 0.62
 };
 
 function isParticleRenderMode(mode: RenderMode): boolean {
@@ -116,6 +137,13 @@ function withAlpha(color: [number, number, number, number], alpha: number): [num
   return [color[0], color[1], color[2], Math.round(255 * Math.max(0, Math.min(1, alpha)))];
 }
 
+function trailAlpha(trailIndex: number, copies: number, glow: number): number {
+  if (copies <= 1) return glow;
+  const fadeRatio = trailIndex / (copies - 1);
+  const tailAlpha = Math.min(glow, Math.max(0.14, glow * 0.35));
+  return glow - (glow - tailAlpha) * fadeRatio;
+}
+
 function hashString(value: string): number {
   let hash = 2166136261;
   for (let index = 0; index < value.length; index += 1) {
@@ -152,6 +180,16 @@ function degreesToRadians(value: number): number {
 
 function radiansToDegrees(value: number): number {
   return (value * 180) / Math.PI;
+}
+
+function mercatorPixel(point: Point, zoom: number): Point {
+  const scale = 512 * 2 ** zoom;
+  const latitude = Math.max(-85.051129, Math.min(85.051129, point[1]));
+  const sinLat = Math.sin(degreesToRadians(latitude));
+  return [
+    ((point[0] + 180) / 360) * scale,
+    (0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)) * scale
+  ];
 }
 
 function particleBudgetToPerFlow(particleBudget: number): number {
@@ -194,6 +232,14 @@ function interpolateGreatCircle(source: Point, target: Point, t: number): Point 
   return [normalizeLongitude(radiansToDegrees(Math.atan2(y, x))), radiansToDegrees(Math.atan2(z, Math.hypot(x, y)))];
 }
 
+function blendRoutePoints(linear: Point, curved: Point, curveStrength: number): Point {
+  const strength = Math.max(0, Math.min(1, curveStrength));
+  return [
+    normalizeLongitude(linear[0] + shortestLongitudeDelta(linear[0], curved[0]) * strength),
+    linear[1] + (curved[1] - linear[1]) * strength
+  ];
+}
+
 function angularDistanceRadians(source: Point, target: Point): number {
   const sourceLon = degreesToRadians(source[0]);
   const sourceLat = degreesToRadians(source[1]);
@@ -211,6 +257,16 @@ function arcAltitudeMeters(source: Point, target: Point, t: number, arcHeight: n
   return Math.sqrt(Math.max(0, t * (1 - t))) * distance * arcHeight;
 }
 
+function arcHeightScale(flow: FlowRecord, config: RenderConfig): number {
+  return (0.45 + Math.min(0.8, flow.lineWidth / 16)) * config.arcHeight;
+}
+
+function plumeDistanceWidth(distance: number, damping: number): number {
+  const distanceWidth = Math.min(9.5, Math.max(0.18, distance * 0.025));
+  const dampedWidth = distanceWidth * (1 - damping) + UNIFORM_PLUME_WIDTH_DEGREES * damping;
+  return Math.max(0.05, dampedWidth);
+}
+
 function bendPointAlongRoute(source: Point, target: Point, base: Point, t: number, bendScale: number): Point {
   const deltaLon = shortestLongitudeDelta(source[0], target[0]);
   const deltaLat = target[1] - source[1];
@@ -221,6 +277,79 @@ function bendPointAlongRoute(source: Point, target: Point, base: Point, t: numbe
     normalizeLongitude(base[0] + (-deltaLat / distance) * bend),
     base[1] + (deltaLon / distance) * bend
   ];
+}
+
+function routeBasePoint(source: Point, target: Point, t: number, arcTrajectory: boolean, config: RenderConfig): Point {
+  if (!arcTrajectory) return interpolateLinear(source, target, t);
+  const linearBase = interpolateLinear(source, target, t);
+  const greatCircleBase = interpolateGreatCircle(source, target, t);
+  const blendedBase = blendRoutePoints(linearBase, greatCircleBase, config.arcCurve);
+  return config.showRoutes
+    ? blendedBase
+    : bendPointAlongRoute(source, target, blendedBase, t, config.arcParticleBend);
+}
+
+function routeScreenLengthPixels(source: Point, target: Point, zoom: number, arcTrajectory: boolean, config: RenderConfig): number {
+  const samples = 14;
+  const worldSize = 512 * 2 ** zoom;
+  let length = 0;
+  let previous = mercatorPixel(routeBasePoint(source, target, 0, arcTrajectory, config), zoom);
+  for (let index = 1; index <= samples; index += 1) {
+    const t = smoothstep(index / samples);
+    const current = mercatorPixel(routeBasePoint(source, target, t, arcTrajectory, config), zoom);
+    let deltaX = current[0] - previous[0];
+    if (deltaX > worldSize / 2) deltaX -= worldSize;
+    if (deltaX < -worldSize / 2) deltaX += worldSize;
+    length += Math.hypot(deltaX, current[1] - previous[1]);
+    previous = current;
+  }
+  return Math.max(1, length);
+}
+
+function splitPathAtAntimeridian(flow: FlowRecord, path: Position3D[]): RoutePath[] {
+  if (!path.length) return [];
+
+  const segments: Position3D[][] = [[path[0]]];
+  for (let index = 1; index < path.length; index += 1) {
+    const previous = path[index - 1];
+    const current = path[index];
+    const lonDelta = current[0] - previous[0];
+    const active = segments[segments.length - 1];
+
+    if (Math.abs(lonDelta) <= 180) {
+      active.push(current);
+      continue;
+    }
+
+    const crossesEast = previous[0] > 0 && current[0] < 0;
+    const edgeLon = crossesEast ? 180 : -180;
+    const wrappedEdgeLon = crossesEast ? -180 : 180;
+    const unwrappedCurrentLon = current[0] + (crossesEast ? 360 : -360);
+    const ratio = (edgeLon - previous[0]) / (unwrappedCurrentLon - previous[0]);
+    const edgeLat = previous[1] + (current[1] - previous[1]) * ratio;
+    const edgeAltitude = previous[2] + (current[2] - previous[2]) * ratio;
+
+    active.push([edgeLon, edgeLat, edgeAltitude]);
+    segments.push([[wrappedEdgeLon, edgeLat, edgeAltitude], current]);
+  }
+
+  return segments
+    .filter((segment) => segment.length >= 2)
+    .map((segment, index) => ({id: `${flow.id}-segment-${index}`, flow, path: segment}));
+}
+
+function buildRoutePaths(flow: FlowRecord, source: Point, target: Point, config: RenderConfig): RoutePath[] {
+  const segments = 64;
+  const path = Array.from({length: segments + 1}, (_, index) => {
+    const t = smoothstep(index / segments);
+    const base = routeBasePoint(source, target, t, true, config);
+    return [
+      base[0],
+      base[1],
+      arcAltitudeMeters(source, target, t, arcHeightScale(flow, config))
+    ] as Position3D;
+  });
+  return splitPathAtAntimeridian(flow, path);
 }
 
 function resolvePickingText(info: any, flows: FlowRecord[]): string | null {
@@ -298,31 +427,28 @@ function buildParticleSeeds(
 }
 
 function particlePosition(particle: ParticleSeed, renderTime: number, config: RenderConfig, arcTrajectory: boolean, offset = 0): Position3D {
-  const rawT = (particle.phase + renderTime * 0.035 * particle.speed * config.speed + offset) % 1;
-  const t = smoothstep(rawT < 0 ? rawT + 1 : rawT);
-  const base = arcTrajectory
-    ? bendPointAlongRoute(
-        particle.source,
-        particle.target,
-        interpolateGreatCircle(particle.source, particle.target, t),
-        t,
-        config.arcParticleBend
-      )
-    : interpolateLinear(particle.source, particle.target, t);
+  const rawT = ((particle.phase + renderTime * 0.035 * particle.speed * config.speed + offset) % 1 + 1) % 1;
+  const t = smoothstep(rawT);
+  const base = routeBasePoint(particle.source, particle.target, t, arcTrajectory, config);
   const [sourceLon, sourceLat] = particle.source;
   const [targetLon, targetLat] = particle.target;
   const deltaLon = shortestLongitudeDelta(sourceLon, targetLon);
   const deltaLat = targetLat - sourceLat;
   const distance = Math.max(1, Math.hypot(deltaLon, deltaLat));
   const plumeStrength = Math.sin(Math.PI * t);
-  const plumeWidth = Math.min(9.5, Math.max(0.18, distance * 0.025)) * plumeStrength * config.plumeWidth;
+  const plumeWidth = plumeDistanceWidth(distance, config.distanceWidthDamping) * plumeStrength;
   const perpLon = -deltaLat / distance;
   const perpLat = deltaLon / distance;
+  const heightSpreadScale = arcTrajectory
+    ? 1 / (1 + plumeStrength * arcHeightScale(particle.flow, config) * config.altitudeWidthDamping)
+    : 1;
+  const stableSpread = particle.lateral * config.plumeWidth;
   const flutter = Math.sin(particle.wobble + renderTime * 0.55 * config.speed + t * Math.PI * 5) * 0.22 * config.jitter;
-  const altitude = arcTrajectory ? arcAltitudeMeters(particle.source, particle.target, t, config.arcHeight) : 0;
+  const lateralOffset = (stableSpread + flutter) * heightSpreadScale;
+  const altitude = arcTrajectory ? arcAltitudeMeters(particle.source, particle.target, t, arcHeightScale(particle.flow, config)) : 0;
   return [
-    normalizeLongitude(base[0] + perpLon * plumeWidth * (particle.lateral * config.jitter + flutter)),
-    base[1] + perpLat * plumeWidth * (particle.lateral * config.jitter + flutter),
+    normalizeLongitude(base[0] + perpLon * plumeWidth * lateralOffset),
+    base[1] + perpLat * plumeWidth * lateralOffset,
     altitude
   ];
 }
@@ -331,20 +457,23 @@ function buildParticleFrame(
   particles: ParticleSeed[],
   renderTime: number,
   mode: RenderMode,
-  config: RenderConfig
+  config: RenderConfig,
+  trailSpacingByFlow: Map<string, number>
 ): ParticlePoint[] {
   const hasTrails = mode === 'particle-trails' || mode === 'particle-arc-trails';
   const arcTrajectory = mode === 'particle-arc-plume' || mode === 'particle-arc-trails';
   const copies = hasTrails ? Math.max(1, Math.round(config.trailCopies)) : 1;
-  const trailOffsets = Array.from({length: copies}, (_, index) => -index * 0.035 * config.trailSpacing);
-  return trailOffsets.flatMap((offset, trailIndex) =>
-    particles.map((particle) => ({
-      id: `${particle.id}-${trailIndex}`,
-      flow: particle.flow,
-      position: particlePosition(particle, renderTime, config, arcTrajectory, offset),
-      radius: Math.max(0.55, (particle.radius - trailIndex * 0.18) * config.particleSize),
-      color: withAlpha(particle.flow.color, config.particleGlow * Math.pow(0.5, trailIndex))
-    }))
+  return Array.from({length: copies}).flatMap((_, trailIndex) =>
+    particles.map((particle) => {
+      const offset = -trailIndex * (trailSpacingByFlow.get(particle.flow.id) ?? 0);
+      return {
+        id: `${particle.id}-${trailIndex}`,
+        flow: particle.flow,
+        position: particlePosition(particle, renderTime, config, arcTrajectory, offset),
+        radius: Math.max(0.55, (particle.radius - trailIndex * 0.18) * config.particleSize),
+        color: withAlpha(particle.flow.color, trailAlpha(trailIndex, copies, config.particleGlow))
+      };
+    })
   );
 }
 
@@ -367,6 +496,7 @@ function RangeControl({
   max,
   step,
   suffix = 'x',
+  displayValue,
   onChange
 }: {
   id: string;
@@ -376,6 +506,7 @@ function RangeControl({
   max: number;
   step: number;
   suffix?: string;
+  displayValue?: string;
   onChange: (value: number) => void;
 }) {
   return (
@@ -383,8 +514,7 @@ function RangeControl({
       <span>
         {label}
         <strong>
-          {value.toFixed(step < 1 ? 2 : 0)}
-          {suffix}
+          {displayValue ?? `${value.toFixed(step < 1 ? 2 : 0)}${suffix}`}
         </strong>
       </span>
       <input
@@ -453,11 +583,12 @@ function MapStage({
     DeckGL: any;
     Map: any;
     FlowmapLayer: any;
-    ArcLayer: any;
+    PathLayer: any;
     ScatterplotLayer: any;
   } | null>(null);
   const [moduleError, setModuleError] = useState<string | null>(null);
   const [renderTime, setRenderTime] = useState(0);
+  const [viewZoom, setViewZoom] = useState(INITIAL_VIEW_STATE.zoom);
 
   useEffect(() => {
     let cancelled = false;
@@ -474,7 +605,7 @@ function MapStage({
           DeckGL: deck.DeckGL,
           Map: maplibre.Map,
           FlowmapLayer: flowmap.FlowmapLayer,
-          ArcLayer: deckLayers.ArcLayer,
+          PathLayer: deckLayers.PathLayer,
           ScatterplotLayer: deckLayers.ScatterplotLayer
         });
       })
@@ -510,9 +641,44 @@ function MapStage({
     [flows, locationsById, renderConfig.particleBudget]
   );
 
+  const routePaths = useMemo(
+    () =>
+      flows.flatMap((flow) => {
+        const source = locationsById.get(flow.origin);
+        const target = locationsById.get(flow.dest);
+        return source && target
+          ? buildRoutePaths(flow, [source.lon, source.lat], [target.lon, target.lat], renderConfig)
+          : [];
+      }),
+    [flows, locationsById, renderConfig]
+  );
+
+  const trailSpacingByFlow = useMemo(() => {
+    const hasTrails = renderMode === 'particle-trails' || renderMode === 'particle-arc-trails';
+    if (!hasTrails) return new globalThis.Map<string, number>();
+
+    const arcTrajectory = renderMode === 'particle-arc-trails';
+    const spacingPixels = renderConfig.trailSpacing * TRAIL_SPACING_PIXEL_SCALE;
+    const offsets = new globalThis.Map<string, number>();
+    for (const flow of flows) {
+      const source = locationsById.get(flow.origin);
+      const target = locationsById.get(flow.dest);
+      if (!source || !target) continue;
+      const routeLength = routeScreenLengthPixels(
+        [source.lon, source.lat],
+        [target.lon, target.lat],
+        viewZoom,
+        arcTrajectory,
+        renderConfig
+      );
+      offsets.set(flow.id, Math.min(0.25, spacingPixels / routeLength));
+    }
+    return offsets;
+  }, [flows, locationsById, renderMode, renderConfig, viewZoom]);
+
   const particleFrame = useMemo(
-    () => buildParticleFrame(particleSeeds, renderTime, renderMode, renderConfig),
-    [particleSeeds, renderTime, renderMode, renderConfig]
+    () => buildParticleFrame(particleSeeds, renderTime, renderMode, renderConfig, trailSpacingByFlow),
+    [particleSeeds, renderTime, renderMode, renderConfig, trailSpacingByFlow]
   );
   const endpointPoints = useMemo(() => {
     const endpoints = new globalThis.Map<string, EndpointPoint>();
@@ -552,7 +718,7 @@ function MapStage({
     );
   }
 
-  const {DeckGL, Map, FlowmapLayer, ArcLayer, ScatterplotLayer} = mapModules;
+  const {DeckGL, Map, FlowmapLayer, PathLayer, ScatterplotLayer} = mapModules;
   const flowsByCommodity = new globalThis.Map<string, FlowRecord[]>();
   for (const flow of flows) {
     flowsByCommodity.set(flow.commodityId, [...(flowsByCommodity.get(flow.commodityId) ?? []), flow]);
@@ -593,32 +759,25 @@ function MapStage({
       });
     });
 
-  const arcLayer = new ArcLayer({
-    id: 'commodity-static-arcs',
-    data: flows,
+  const routeLayer = new PathLayer({
+    id: 'commodity-route-paths',
+    data: routePaths,
     pickable: true,
-    greatCircle: true,
-    numSegments: 64,
-    getSourcePosition: (flow: FlowRecord) => {
-      const location = locationsById.get(flow.origin);
-      return location ? [location.lon, location.lat] : [0, 0];
-    },
-    getTargetPosition: (flow: FlowRecord) => {
-      const location = locationsById.get(flow.dest);
-      return location ? [location.lon, location.lat] : [0, 0];
-    },
-    getSourceColor: (flow: FlowRecord) => withAlpha(flow.color, (renderMode === 'static-arcs' ? 0.58 : 0.17) * renderConfig.routeOpacity * renderConfig.showRoutes),
-    getTargetColor: (flow: FlowRecord) => withAlpha(flow.color, (renderMode === 'static-arcs' ? 0.92 : 0.28) * renderConfig.routeOpacity * renderConfig.showRoutes),
-    getWidth: (flow: FlowRecord) => Math.max(0.25, flow.lineWidth * (renderMode === 'static-arcs' ? 0.7 : 0.22) * renderConfig.routeWidth),
-    getHeight: (flow: FlowRecord) => (0.45 + Math.min(0.8, flow.lineWidth / 16)) * renderConfig.arcHeight,
-    getTilt: (flow: FlowRecord) => (random01(`${flow.id}:tilt`) - 0.5) * 16 * renderConfig.arcTilt,
-    widthUnits: 'pixels',
-    widthMinPixels: renderMode === 'static-arcs' ? 0.7 : 0.25,
-    widthMaxPixels: (renderMode === 'static-arcs' ? 8 : 2.2) * renderConfig.routeWidth,
+    getPath: (route: RoutePath) => route.path,
+    getColor: (route: RoutePath) =>
+      withAlpha(route.flow.color, (renderMode === 'static-arcs' ? 0.78 : 0.24) * renderConfig.routeOpacity * renderConfig.showRoutes),
+    getWidth: (route: RoutePath) =>
+      route.flow.lineWidth * (renderMode === 'static-arcs' ? 0.7 : 0.22) * renderConfig.routeWidth * ROUTE_WIDTH_METERS,
+    widthUnits: 'meters',
+    widthMinPixels: 0,
+    widthMaxPixels: Number.MAX_SAFE_INTEGER,
+    capRounded: true,
+    jointRounded: true,
+    billboard: true,
     parameters: {depthTest: false},
     onHover: (info: any) => {
-      const flow = info.object as FlowRecord | undefined;
-      onHoverInfo(flow ? {text: flow.tooltip, x: info.x ?? 0, y: info.y ?? 0} : null);
+      const route = info.object as RoutePath | undefined;
+      onHoverInfo(route ? {text: route.flow.tooltip, x: info.x ?? 0, y: info.y ?? 0} : null);
     }
   });
 
@@ -651,15 +810,15 @@ function MapStage({
     data: endpointPoints,
     pickable: true,
     radiusUnits: 'pixels',
-    radiusMinPixels: 2.4,
-    radiusMaxPixels: 9,
+    radiusMinPixels: 2.4 * renderConfig.endpointSize,
+    radiusMaxPixels: 9 * renderConfig.endpointSize,
     stroked: true,
     filled: true,
     getPosition: (endpoint: EndpointPoint) => endpoint.position,
     getRadius: (endpoint: EndpointPoint) =>
-      2.4 + 6 * Math.sqrt(maxEndpointTonnes ? endpoint.tonnes / maxEndpointTonnes : 0),
-    getFillColor: [246, 237, 216, 118],
-    getLineColor: [231, 184, 78, 190],
+      (2.4 + 6 * Math.sqrt(maxEndpointTonnes ? endpoint.tonnes / maxEndpointTonnes : 0)) * renderConfig.endpointSize,
+    getFillColor: [246, 237, 216, Math.min(255, Math.round(118 * renderConfig.endpointOpacity))],
+    getLineColor: [231, 184, 78, Math.min(255, Math.round(190 * renderConfig.endpointOpacity))],
     getLineWidth: 1.2,
     lineWidthUnits: 'pixels',
     parameters: {depthTest: false},
@@ -675,16 +834,17 @@ function MapStage({
 
   const layers =
     renderMode === 'static-arcs'
-      ? [arcLayer, endpointLayer]
+      ? [routeLayer, renderConfig.showEndpoints ? endpointLayer : null].filter(Boolean)
       : isParticleRenderMode(renderMode)
-        ? [renderConfig.showRoutes ? arcLayer : null, particleLayer, endpointLayer].filter(Boolean)
+        ? [renderConfig.showRoutes ? routeLayer : null, particleLayer, renderConfig.showEndpoints ? endpointLayer : null].filter(Boolean)
         : flowmapLayers().filter(Boolean);
 
   return (
     <DeckGL
-      initialViewState={{longitude: 18, latitude: 22, zoom: 1.22, pitch: 0, bearing: 0}}
+      initialViewState={INITIAL_VIEW_STATE}
       controller={true}
       layers={layers}
+      onViewStateChange={({viewState}: any) => setViewZoom(viewState.zoom)}
     >
       <Map reuseMaps mapStyle={MAP_STYLE} />
     </DeckGL>
@@ -752,6 +912,19 @@ function App() {
   }));
   const particleMass = estimateParticleMass(filteredFlows, renderConfig.particleBudget, selectedCommodity);
   const isParticleMode = isParticleRenderMode(renderMode);
+  const particleMasses = isParticleMode
+    ? visibleCommodities
+        .map((commodity) => estimateParticleMass(filteredFlows, renderConfig.particleBudget, commodity))
+        .filter((mass): mass is number => mass !== null && Number.isFinite(mass))
+    : [];
+  const particleBudgetLabel = Math.round(renderConfig.particleBudget).toLocaleString('en-US');
+  const particleUnitText = !isParticleMode
+    ? null
+    : selectedCommodity && particleMass
+      ? `One dot on the largest visible ${selectedCommodity.name} flow represents about ${formatTonnes(particleMass)}; budget ${particleBudgetLabel} dots.`
+      : particleMasses.length
+        ? `One dot on the largest visible flow per commodity represents about ${formatTonnes(Math.min(...particleMasses))} to ${formatTonnes(Math.max(...particleMasses))}; budget ${particleBudgetLabel} dots.`
+        : null;
   const updateRenderConfig = (key: keyof RenderConfig, value: number) => {
     setRenderConfig((current) => ({...current, [key]: value}));
   };
@@ -845,10 +1018,28 @@ function App() {
                   onChange={(value) => updateRenderConfig('plumeWidth', value)}
                 />
                 <RangeControl
+                  id="distance-width-damping"
+                  label="Distance width damping"
+                  min={0}
+                  max={1}
+                  step={0.02}
+                  value={renderConfig.distanceWidthDamping}
+                  onChange={(value) => updateRenderConfig('distanceWidthDamping', value)}
+                />
+                <RangeControl
+                  id="altitude-width-damping"
+                  label="Altitude width damping"
+                  min={0}
+                  max={5}
+                  step={0.05}
+                  value={renderConfig.altitudeWidthDamping}
+                  onChange={(value) => updateRenderConfig('altitudeWidthDamping', value)}
+                />
+                <RangeControl
                   id="jitter"
                   label="Jitter"
                   min={0}
-                  max={3}
+                  max={2}
                   step={0.05}
                   value={renderConfig.jitter}
                   onChange={(value) => updateRenderConfig('jitter', value)}
@@ -857,7 +1048,7 @@ function App() {
                   id="particle-size"
                   label="Particle size"
                   min={0.3}
-                  max={3}
+                  max={1.5}
                   step={0.05}
                   value={renderConfig.particleSize}
                   onChange={(value) => updateRenderConfig('particleSize', value)}
@@ -885,15 +1076,16 @@ function App() {
                 <RangeControl
                   id="trail-spacing"
                   label="Trail spacing"
-                  min={0.2}
-                  max={3}
-                  step={0.05}
+                  min={0.01}
+                  max={0.5}
+                  step={0.01}
                   value={renderConfig.trailSpacing}
+                  displayValue={`${Math.round(renderConfig.trailSpacing * TRAIL_SPACING_PIXEL_SCALE)} px`}
                   onChange={(value) => updateRenderConfig('trailSpacing', value)}
                 />
                 <RangeControl
                   id="arc-particle-bend"
-                  label="Extra 2D arc bend"
+                  label="Hidden-route arc bend"
                   min={0}
                   max={2.5}
                   step={0.05}
@@ -924,11 +1116,20 @@ function App() {
                 <RangeControl
                   id="route-width"
                   label="Route width"
-                  min={0.1}
-                  max={6}
+                  min={0}
+                  max={10}
                   step={0.05}
                   value={renderConfig.routeWidth}
                   onChange={(value) => updateRenderConfig('routeWidth', value)}
+                />
+                <RangeControl
+                  id="arc-curve"
+                  label="Arc curve"
+                  min={0}
+                  max={1}
+                  step={0.02}
+                  value={renderConfig.arcCurve}
+                  onChange={(value) => updateRenderConfig('arcCurve', value)}
                 />
                 <RangeControl
                   id="arc-height"
@@ -947,6 +1148,32 @@ function App() {
                   step={0.05}
                   value={renderConfig.arcTilt}
                   onChange={(value) => updateRenderConfig('arcTilt', value)}
+                />
+                <button
+                  className="ghost-button inline-toggle"
+                  type="button"
+                  onClick={() => updateRenderConfig('showEndpoints', renderConfig.showEndpoints ? 0 : 1)}
+                >
+                  {renderConfig.showEndpoints ? 'Hide endpoint circles' : 'Show endpoint circles'}
+                </button>
+                <RangeControl
+                  id="endpoint-size"
+                  label="Endpoint size"
+                  min={0}
+                  max={10}
+                  step={0.1}
+                  value={renderConfig.endpointSize}
+                  onChange={(value) => updateRenderConfig('endpointSize', value)}
+                />
+                <RangeControl
+                  id="endpoint-opacity"
+                  label="Endpoint brightness"
+                  min={0}
+                  max={1.5}
+                  step={0.05}
+                  value={renderConfig.endpointOpacity}
+                  suffix=""
+                  onChange={(value) => updateRenderConfig('endpointOpacity', value)}
                 />
               </>
             ) : null}
@@ -989,6 +1216,8 @@ function App() {
             <small>{activeCommodity === 'all' ? 'max. sichtbarer Strom je Commodity' : 'Linienstärke dieser Commodity'}</small>
           </div>
 
+          {particleUnitText ? <p className="particle-note particle-unit">{particleUnitText}</p> : null}
+
           {selectedCommodity ? (
             <div className="thickness-legend">
               {legendSamples.map((sample) => (
@@ -1003,12 +1232,6 @@ function App() {
                   <span>{sample.label}</span>
                 </div>
               ))}
-              {isParticleMode && particleMass ? (
-                <p className="particle-note">
-                  1 particle ≈ {formatTonnes(particleMass)} auf dem groessten sichtbaren Flow;
-                  Budget {Math.round(renderConfig.particleBudget).toLocaleString('en-US')} Punkte.
-                </p>
-              ) : null}
             </div>
           ) : (
             <div className="commodity-legend">
@@ -1019,11 +1242,6 @@ function App() {
                   <small>{formatTonnes(commodity.maxQuantity)}</small>
                 </div>
               ))}
-              {isParticleMode ? (
-                <p className="particle-note">
-                  Partikel werden je Commodity separat skaliert; fuer exakte Tonnen-pro-Partikel bitte eine Commodity waehlen.
-                </p>
-              ) : null}
             </div>
           )}
         </section>

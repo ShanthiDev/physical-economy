@@ -7029,10 +7029,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Canada -> United States | 182728346 tonnes net | gross CAN->USA: 200796139.221 t, reverse: 18067793.334 t",
       "sourceId": "nf_2024_crude_oil_CAN_USA_07241"
@@ -7048,10 +7048,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Arab Emirates -> Thailand | 151659782.197 tonnes net | gross ARE->THA: 151659782.201 t, reverse: 0.004 t",
       "sourceId": "nf_2024_crude_oil_ARE_THA_06977"
@@ -7067,10 +7067,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Russian Federation -> China | 108469240 tonnes net | gross RUS->CHN: 108469240 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_RUS_07296"
@@ -7086,10 +7086,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Russian Federation -> India | 92008859 tonnes net | gross RUS->IND: 92008859 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IND_RUS_07669"
@@ -7105,10 +7105,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> China | 78637619 tonnes net | gross SAU->CHN: 78637619 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_SAU_07297"
@@ -7124,10 +7124,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Iraq -> China | 63838060 tonnes net | gross IRQ->CHN: 63838060 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_IRQ_07275"
@@ -7143,10 +7143,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Iraq -> India | 50090900 tonnes net | gross IRQ->IND: 50090900 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IND_IRQ_07656"
@@ -7162,10 +7162,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Arab Emirates -> Japan | 49478700 tonnes net | gross ARE->JPN: 49478700 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ARE_JPN_06966"
@@ -7181,10 +7181,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Malaysia -> China | 48472095.735 tonnes net | gross MYS->CHN: 48595190.341 t, reverse: 123094.606 t",
       "sourceId": "nf_2024_crude_oil_CHN_MYS_07287"
@@ -7200,10 +7200,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> South Korea | 47806530 tonnes net | gross SAU->KOR: 47806530 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_KOR_SAU_07773"
@@ -7219,10 +7219,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> Japan | 46433650 tonnes net | gross SAU->JPN: 46433650 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_JPN_SAU_07734"
@@ -7238,10 +7238,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Oman -> China | 40767880 tonnes net | gross OMN->CHN: 40767880 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_OMN_07293"
@@ -7257,10 +7257,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Brazil -> China | 39629305.112 tonnes net | gross BRA->CHN: 39629305.112 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_BRA_CHN_07150"
@@ -7276,10 +7276,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Arab Emirates -> China | 35532280 tonnes net | gross ARE->CHN: 35532280 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ARE_CHN_06957"
@@ -7295,10 +7295,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> Netherlands | 33565400.296 tonnes net | gross USA->NLD: 33577883.296 t, reverse: 12483 t",
       "sourceId": "nf_2024_crude_oil_NLD_USA_07888"
@@ -7314,10 +7314,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> India | 31723400 tonnes net | gross SAU->IND: 31723400 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IND_SAU_07670"
@@ -7333,10 +7333,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Angola -> China | 28721490 tonnes net | gross AGO->CHN: 28721490 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_AGO_CHN_06926"
@@ -7352,10 +7352,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Netherlands -> Belgium | 26901991.626 tonnes net | gross NLD->BEL: 27561134.843 t, reverse: 659143.217 t",
       "sourceId": "nf_2024_crude_oil_BEL_NLD_07098"
@@ -7371,10 +7371,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Mexico -> United States | 26496534.955 tonnes net | gross MEX->USA: 26496536.238 t, reverse: 1.283 t",
       "sourceId": "nf_2024_crude_oil_MEX_USA_07817"
@@ -7390,10 +7390,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> South Korea | 21521913.957 tonnes net | gross USA->KOR: 21521913.957 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_KOR_USA_07778"
@@ -7409,10 +7409,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Arab Emirates -> India | 21250800 tonnes net | gross ARE->IND: 21250800 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ARE_IND_06964"
@@ -7428,10 +7428,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kazakhstan -> Italy | 20715471.608 tonnes net | gross KAZ->ITA: 20715471.608 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ITA_KAZ_07700"
@@ -7447,10 +7447,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Norway -> United Kingdom | 19502645.228 tonnes net | gross NOR->GBR: 19595474.091 t, reverse: 92828.863 t",
       "sourceId": "nf_2024_crude_oil_GBR_NOR_07562"
@@ -7466,10 +7466,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Arab Emirates -> South Korea | 18577700 tonnes net | gross ARE->KOR: 18577700 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ARE_KOR_06968"
@@ -7485,10 +7485,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kuwait -> China | 15970070 tonnes net | gross KWT->CHN: 15970070 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_KWT_07280"
@@ -7504,10 +7504,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> United States | 15604896.318 tonnes net | gross SAU->USA: 15604927.482 t, reverse: 31.164 t",
       "sourceId": "nf_2024_crude_oil_SAU_USA_07944"
@@ -7523,10 +7523,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> United Kingdom | 14013761.361 tonnes net | gross USA->GBR: 16870063.119 t, reverse: 2856301.758 t",
       "sourceId": "nf_2024_crude_oil_GBR_USA_07571"
@@ -7542,10 +7542,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Iraq -> South Korea | 13904946 tonnes net | gross IRQ->KOR: 13904946 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IRQ_KOR_07681"
@@ -7561,10 +7561,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> Poland | 13375532 tonnes net | gross SAU->POL: 13375532 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_POL_SAU_07923"
@@ -7580,10 +7580,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Venezuela -> United States | 13157409.636 tonnes net | gross VEN->USA: 13157409.636 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_USA_VEN_07975"
@@ -7599,10 +7599,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Arab Emirates -> Singapore | 12593200 tonnes net | gross ARE->SGP: 12593200 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ARE_SGP_06976"
@@ -7618,10 +7618,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> Singapore | 12177931.087 tonnes net | gross USA->SGP: 12177931.427 t, reverse: 0.34 t",
       "sourceId": "nf_2024_crude_oil_SGP_USA_07953"
@@ -7637,10 +7637,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Norway -> Netherlands | 12047981.406 tonnes net | gross NOR->NLD: 12047981.407 t, reverse: 0.001 t",
       "sourceId": "nf_2024_crude_oil_NLD_NOR_07867"
@@ -7656,10 +7656,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> Germany | 11841673.899 tonnes net | gross USA->DEU: 11841673.899 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_DEU_USA_07416"
@@ -7675,10 +7675,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Ecuador -> Panama | 11714386.34 tonnes net | gross ECU->PAN: 11714386.34 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ECU_PAN_07455"
@@ -7694,10 +7694,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kuwait -> South Korea | 11435121 tonnes net | gross KWT->KOR: 11435121 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_KOR_KWT_07760"
@@ -7713,10 +7713,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Libya -> Italy | 11343400 tonnes net | gross LBY->ITA: 11343400 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ITA_LBY_07701"
@@ -7732,10 +7732,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Iraq -> United States | 11211291.294 tonnes net | gross IRQ->USA: 11211291.294 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IRQ_USA_07688"
@@ -7751,10 +7751,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> France | 10827500.534 tonnes net | gross USA->FRA: 10839918.393 t, reverse: 12417.859 t",
       "sourceId": "nf_2024_crude_oil_FRA_USA_07541"
@@ -7770,10 +7770,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Norway -> Poland | 10428269.372 tonnes net | gross NOR->POL: 10428269.372 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_NOR_POL_07891"
@@ -7789,10 +7789,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> Canarias | 10405753.82 tonnes net | gross USA->ESP: 10405753.82 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ESP_USA_07500"
@@ -7808,10 +7808,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> China | 10230160.088 tonnes net | gross USA->CHN: 10230160.088 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_USA_07304"
@@ -7827,10 +7827,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Azerbaijan -> Italy | 10143218.987 tonnes net | gross AZE->ITA: 10143218.987 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_AZE_ITA_07054"
@@ -7846,10 +7846,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Guyana -> United States | 10033927.935 tonnes net | gross GUY->USA: 10033927.935 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_GUY_USA_07619"
@@ -7865,10 +7865,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Qatar -> China | 10003786.683 tonnes net | gross QAT->CHN: 10003786.683 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_QAT_07295"
@@ -7884,10 +7884,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Brazil -> United States | 9941780.631 tonnes net | gross BRA->USA: 12211277.6 t, reverse: 2269496.969 t",
       "sourceId": "nf_2024_crude_oil_BRA_USA_07185"
@@ -7903,10 +7903,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United Kingdom -> Netherlands | 9856039.226 tonnes net | gross GBR->NLD: 9886538.68 t, reverse: 30499.454 t",
       "sourceId": "nf_2024_crude_oil_GBR_NLD_07561"
@@ -7922,10 +7922,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Brazil -> Canarias | 9570328.308 tonnes net | gross BRA->ESP: 9570328.678 t, reverse: 0.37 t",
       "sourceId": "nf_2024_crude_oil_BRA_ESP_07158"
@@ -7941,10 +7941,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Norway -> Germany | 9494778.819 tonnes net | gross NOR->DEU: 9494778.819 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_DEU_NOR_07404"
@@ -7960,10 +7960,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> Malaysia | 9307595 tonnes net | gross SAU->MYS: 9307595 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_MYS_SAU_07838"
@@ -7979,10 +7979,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Colombia -> United States | 9227342.42 tonnes net | gross COL->USA: 9744293.793 t, reverse: 516951.373 t",
       "sourceId": "nf_2024_crude_oil_COL_USA_07359"
@@ -7998,10 +7998,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Mexico -> Canarias | 8586834.12 tonnes net | gross MEX->ESP: 8586834.5 t, reverse: 0.38 t",
       "sourceId": "nf_2024_crude_oil_ESP_MEX_07485"
@@ -8017,10 +8017,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Norway -> Sweden | 8577384.419 tonnes net | gross NOR->SWE: 8577420.419 t, reverse: 36 t",
       "sourceId": "nf_2024_crude_oil_NOR_SWE_07896"
@@ -8036,10 +8036,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Iraq -> Greece | 8229894 tonnes net | gross IRQ->GRC: 8229894 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_GRC_IRQ_07592"
@@ -8055,10 +8055,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Colombia -> Panama | 8107310 tonnes net | gross COL->PAN: 8107310 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_COL_PAN_07355"
@@ -8074,10 +8074,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kuwait -> Japan | 8086066 tonnes net | gross KWT->JPN: 8086066 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_JPN_KWT_07726"
@@ -8093,10 +8093,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> India | 7707383.611 tonnes net | gross USA->IND: 7707383.611 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IND_USA_07675"
@@ -8112,10 +8112,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kazakhstan -> Netherlands | 7662380.574 tonnes net | gross KAZ->NLD: 7662380.574 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_KAZ_NLD_07745"
@@ -8131,10 +8131,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Nigeria -> Canarias | 7595134.701 tonnes net | gross NGA->ESP: 7595134.701 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_ESP_NGA_07487"
@@ -8150,10 +8150,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Libya -> Germany | 7396755.1 tonnes net | gross LBY->DEU: 7396755.1 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_DEU_LBY_07398"
@@ -8169,10 +8169,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Iraq -> Netherlands | 7172630.572 tonnes net | gross IRQ->NLD: 7172630.572 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IRQ_NLD_07683"
@@ -8188,10 +8188,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Qatar -> South Korea | 6853996.906 tonnes net | gross QAT->KOR: 6853996.906 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_KOR_QAT_07772"
@@ -8207,10 +8207,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Norway -> Finland | 6835439.251 tonnes net | gross NOR->FIN: 6835439.251 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_FIN_NOR_07507"
@@ -8226,10 +8226,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Congo -> China | 6551079 tonnes net | gross COG->CHN: 6551079 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_COG_07260"
@@ -8245,10 +8245,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Brazil -> Netherlands | 6394782.291 tonnes net | gross BRA->NLD: 6425395.861 t, reverse: 30613.57 t",
       "sourceId": "nf_2024_crude_oil_BRA_NLD_07175"
@@ -8264,10 +8264,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Nigeria -> France | 6372732.796 tonnes net | gross NGA->FRA: 6372732.796 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_FRA_NGA_07530"
@@ -8283,10 +8283,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Nigeria -> India | 6288524.179 tonnes net | gross NGA->IND: 6288524.179 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IND_NGA_07664"
@@ -8302,10 +8302,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Canada -> China | 6168610.89 tonnes net | gross CAN->CHN: 6168611.411 t, reverse: 0.521 t",
       "sourceId": "nf_2024_crude_oil_CAN_CHN_07206"
@@ -8321,10 +8321,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> Thailand | 5884971.6 tonnes net | gross SAU->THA: 5884971.6 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_SAU_THA_07943"
@@ -8340,10 +8340,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Angola -> India | 5781781 tonnes net | gross AGO->IND: 5781781 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_AGO_IND_06934"
@@ -8359,10 +8359,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Ecuador -> China | 5678949 tonnes net | gross ECU->CHN: 5678949 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_CHN_ECU_07264"
@@ -8378,10 +8378,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Nigeria -> United States | 5579132.699 tonnes net | gross NGA->USA: 7958599.499 t, reverse: 2379466.8 t",
       "sourceId": "nf_2024_crude_oil_NGA_USA_07862"
@@ -8397,10 +8397,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Saudi Arabia -> Pakistan | 5542066 tonnes net | gross SAU->PAK: 5542066 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_PAK_SAU_07908"
@@ -8416,10 +8416,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kazakhstan -> France | 5276027.545 tonnes net | gross KAZ->FRA: 5276027.545 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_FRA_KAZ_07523"
@@ -8435,10 +8435,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kazakhstan -> Greece | 5275798.703 tonnes net | gross KAZ->GRC: 5275798.703 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_GRC_KAZ_07595"
@@ -8454,10 +8454,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Kuwait -> India | 5251690 tonnes net | gross KWT->IND: 5251690 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IND_KWT_07659"
@@ -8473,10 +8473,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: United States -> Thailand | 5079029.768 tonnes net | gross USA->THA: 5079029.879 t, reverse: 0.111 t",
       "sourceId": "nf_2024_crude_oil_THA_USA_07965"
@@ -8492,10 +8492,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Qatar -> Singapore | 4934268.754 tonnes net | gross QAT->SGP: 5113923.654 t, reverse: 179654.9 t",
       "sourceId": "nf_2024_crude_oil_QAT_SGP_07931"
@@ -8511,10 +8511,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Guyana -> Netherlands | 4841960 tonnes net | gross GUY->NLD: 4841960 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_GUY_NLD_07613"
@@ -8530,10 +8530,10 @@
       "commodityId": "crude_oil",
       "commodityGroup": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "tooltip": "Crude oil: Nigeria -> Indonesia | 4748538.912 tonnes net | gross NGA->IDN: 4748538.912 t, reverse: 0 t",
       "sourceId": "nf_2024_crude_oil_IDN_NGA_07646"
@@ -8549,10 +8549,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> India | 109249126.771 tonnes net | gross IDN->IND: 109249266.493 t, reverse: 139.722 t",
       "sourceId": "nf_2024_hard_coal_IDN_IND_09062"
@@ -8568,10 +8568,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Japan | 108585294.42 tonnes net | gross AUS->JPN: 108585294.42 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_JPN_08332"
@@ -8587,10 +8587,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> China | 88333900.79 tonnes net | gross RUS->CHN: 88333915 t, reverse: 14.21 t",
       "sourceId": "nf_2024_hard_coal_CHN_RUS_08651"
@@ -8606,10 +8606,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> China | 83574114.755 tonnes net | gross AUS->CHN: 83575747.518 t, reverse: 1632.763 t",
       "sourceId": "nf_2024_hard_coal_AUS_CHN_08316"
@@ -8625,10 +8625,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> China | 83145583.748 tonnes net | gross IDN->CHN: 85051160 t, reverse: 1905576.24 t",
       "sourceId": "nf_2024_hard_coal_CHN_IDN_08615"
@@ -8644,10 +8644,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Mongolia -> China | 78774261 tonnes net | gross MNG->CHN: 78774261 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_CHN_MNG_08637"
@@ -8663,10 +8663,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> India | 56801429.493 tonnes net | gross AUS->IND: 56801432.493 t, reverse: 3 t",
       "sourceId": "nf_2024_hard_coal_AUS_IND_08329"
@@ -8682,10 +8682,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Philippines | 38980543.958 tonnes net | gross IDN->PHL: 38980544.31 t, reverse: 0.352 t",
       "sourceId": "nf_2024_hard_coal_IDN_PHL_09079"
@@ -8701,10 +8701,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> South Korea | 33642644.469 tonnes net | gross AUS->KOR: 33642644.869 t, reverse: 0.4 t",
       "sourceId": "nf_2024_hard_coal_AUS_KOR_08334"
@@ -8720,10 +8720,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> India | 32592621.289 tonnes net | gross ZAF->IND: 32592623.292 t, reverse: 2.003 t",
       "sourceId": "nf_2024_hard_coal_IND_ZAF_09126"
@@ -8739,10 +8739,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> South Korea | 28956457.665 tonnes net | gross IDN->KOR: 28956459.271 t, reverse: 1.606 t",
       "sourceId": "nf_2024_hard_coal_IDN_KOR_09068"
@@ -8758,10 +8758,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Japan | 28911895.641 tonnes net | gross IDN->JPN: 28914122.641 t, reverse: 2227 t",
       "sourceId": "nf_2024_hard_coal_IDN_JPN_09066"
@@ -8777,10 +8777,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Malaysia | 27135531.208 tonnes net | gross IDN->MYS: 27151902.336 t, reverse: 16371.128 t",
       "sourceId": "nf_2024_hard_coal_IDN_MYS_09074"
@@ -8796,10 +8796,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Vietnam | 27110709.199 tonnes net | gross IDN->VNM: 27188660 t, reverse: 77950.801 t",
       "sourceId": "nf_2024_hard_coal_IDN_VNM_09092"
@@ -8815,10 +8815,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> India | 26940778 tonnes net | gross RUS->IND: 26940778 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_IND_RUS_09116"
@@ -8834,10 +8834,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> Turkey | 24419972.726 tonnes net | gross RUS->TUR: 24419972.726 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_RUS_TUR_09457"
@@ -8853,10 +8853,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> India | 21451261.035 tonnes net | gross USA->IND: 21451262.357 t, reverse: 1.322 t",
       "sourceId": "nf_2024_hard_coal_IND_USA_09123"
@@ -8872,10 +8872,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> South Korea | 18509347.2 tonnes net | gross RUS->KOR: 18509347.2 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_KOR_RUS_09250"
@@ -8891,10 +8891,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Vietnam | 17752330 tonnes net | gross AUS->VNM: 17752330 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_VNM_08352"
@@ -8910,10 +8910,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Kazakhstan -> Russian Federation | 15852208.9 tonnes net | gross KAZ->RUS: 16868052.3 t, reverse: 1015843.4 t",
       "sourceId": "nf_2024_hard_coal_KAZ_RUS_09215"
@@ -8929,10 +8929,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Thailand | 13892038.722 tonnes net | gross IDN->THA: 13892950.727 t, reverse: 912.005 t",
       "sourceId": "nf_2024_hard_coal_IDN_THA_09088"
@@ -8948,10 +8948,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Bangladesh | 13245464 tonnes net | gross IDN->BGD: 13245464 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_BGD_IDN_08442"
@@ -8967,10 +8967,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Malaysia | 12575050.325 tonnes net | gross AUS->MYS: 12575053.084 t, reverse: 2.759 t",
       "sourceId": "nf_2024_hard_coal_AUS_MYS_08336"
@@ -8986,10 +8986,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Japan | 12095767.429 tonnes net | gross USA->JPN: 12095767.429 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_JPN_USA_09202"
@@ -9005,10 +9005,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> China | 12057209.032 tonnes net | gross USA->CHN: 12107425.346 t, reverse: 50216.314 t",
       "sourceId": "nf_2024_hard_coal_CHN_USA_08665"
@@ -9024,10 +9024,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Morocco | 11526910.82 tonnes net | gross USA->MAR: 11526910.82 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_MAR_USA_09303"
@@ -9043,10 +9043,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Canada -> South Korea | 9903121.309 tonnes net | gross CAN->KOR: 9903121.309 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_CAN_KOR_08558"
@@ -9062,10 +9062,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> South Korea | 9640198.421 tonnes net | gross COL->KOR: 9640198.421 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_KOR_08708"
@@ -9081,10 +9081,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Canada -> China | 9478205.891 tonnes net | gross CAN->CHN: 9478253.891 t, reverse: 48 t",
       "sourceId": "nf_2024_hard_coal_CAN_CHN_08540"
@@ -9100,10 +9100,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Canada -> Japan | 9436470.926 tonnes net | gross CAN->JPN: 9436478.053 t, reverse: 7.127 t",
       "sourceId": "nf_2024_hard_coal_CAN_JPN_08557"
@@ -9119,10 +9119,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Netherlands | 8420910.962 tonnes net | gross AUS->NLD: 8420911 t, reverse: 0.038 t",
       "sourceId": "nf_2024_hard_coal_AUS_NLD_08338"
@@ -9138,10 +9138,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Philippines -> China | 8162316.06 tonnes net | gross PHL->CHN: 8171070 t, reverse: 8753.94 t",
       "sourceId": "nf_2024_hard_coal_CHN_PHL_08647"
@@ -9157,10 +9157,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Mozambique -> India | 8019480.972 tonnes net | gross MOZ->IND: 8019480.972 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_IND_MOZ_09106"
@@ -9176,10 +9176,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Turkey | 7647841.315 tonnes net | gross COL->TUR: 7647841.315 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_TUR_08723"
@@ -9195,10 +9195,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Brazil | 7140674.151 tonnes net | gross USA->BRA: 7140674.151 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_BRA_USA_08523"
@@ -9214,10 +9214,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Indonesia | 7029436.673 tonnes net | gross AUS->IDN: 7155536.745 t, reverse: 126100.072 t",
       "sourceId": "nf_2024_hard_coal_AUS_IDN_08328"
@@ -9233,10 +9233,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> China | 6996164.929 tonnes net | gross COL->CHN: 6996188 t, reverse: 23.07 t",
       "sourceId": "nf_2024_hard_coal_CHN_COL_08599"
@@ -9252,10 +9252,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Netherlands | 6756949.428 tonnes net | gross COL->NLD: 6756949.428 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_NLD_08712"
@@ -9271,10 +9271,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Germany | 6278285.767 tonnes net | gross AUS->DEU: 6278285.767 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_DEU_08319"
@@ -9290,10 +9290,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> South Korea | 6172716.811 tonnes net | gross ZAF->KOR: 6172717.066 t, reverse: 0.255 t",
       "sourceId": "nf_2024_hard_coal_KOR_ZAF_09260"
@@ -9309,10 +9309,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Brazil | 5472975.512 tonnes net | gross AUS->BRA: 5472975.512 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_BRA_08312"
@@ -9328,10 +9328,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Germany | 5466070.605 tonnes net | gross USA->DEU: 5466430.844 t, reverse: 360.239 t",
       "sourceId": "nf_2024_hard_coal_DEU_USA_08820"
@@ -9347,10 +9347,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Netherlands | 5396637.191 tonnes net | gross USA->NLD: 5396990.191 t, reverse: 353 t",
       "sourceId": "nf_2024_hard_coal_NLD_USA_09384"
@@ -9366,10 +9366,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> Indonesia | 5298291 tonnes net | gross RUS->IDN: 5298291 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_IDN_RUS_09084"
@@ -9385,10 +9385,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Cambodia | 5156303.867 tonnes net | gross IDN->KHM: 5156303.867 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_IDN_KHM_09067"
@@ -9404,10 +9404,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> Vietnam | 4630502 tonnes net | gross ZAF->VNM: 4677522 t, reverse: 47020 t",
       "sourceId": "nf_2024_hard_coal_VNM_ZAF_09516"
@@ -9423,10 +9423,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> South Korea | 4531314.16 tonnes net | gross USA->KOR: 4531332.073 t, reverse: 17.913 t",
       "sourceId": "nf_2024_hard_coal_KOR_USA_09257"
@@ -9442,10 +9442,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Chile | 4272851.796 tonnes net | gross COL->CHL: 4272851.796 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_CHL_COL_08592"
@@ -9461,10 +9461,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Thailand | 3926079.986 tonnes net | gross AUS->THA: 3926079.986 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_THA_08348"
@@ -9480,10 +9480,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Mozambique -> Vietnam | 3632940 tonnes net | gross MOZ->VNM: 3632940 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_MOZ_VNM_09336"
@@ -9499,10 +9499,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Mexico | 3584480 tonnes net | gross COL->MEX: 3584480 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_MEX_08710"
@@ -9518,10 +9518,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Egypt | 3477406.404 tonnes net | gross USA->EGY: 3477406.404 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_EGY_USA_08878"
@@ -9537,10 +9537,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> Japan | 3385260.074 tonnes net | gross ZAF->JPN: 3385260.074 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_JPN_ZAF_09204"
@@ -9556,10 +9556,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> Pakistan | 3382078.849 tonnes net | gross ZAF->PAK: 3382078.849 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_PAK_ZAF_09405"
@@ -9575,10 +9575,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Mozambique -> South Korea | 3291474.4 tonnes net | gross MOZ->KOR: 3291474.4 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_KOR_MOZ_09243"
@@ -9594,10 +9594,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Brazil | 3211267.935 tonnes net | gross COL->BRA: 3211267.935 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_BRA_COL_08509"
@@ -9613,10 +9613,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Canada | 3141976.691 tonnes net | gross USA->CAN: 3807563.691 t, reverse: 665587 t",
       "sourceId": "nf_2024_hard_coal_CAN_USA_08570"
@@ -9632,10 +9632,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Kazakhstan -> Poland | 2866665.203 tonnes net | gross KAZ->POL: 2866665.203 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_KAZ_POL_09213"
@@ -9651,10 +9651,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> France | 2806915.375 tonnes net | gross AUS->FRA: 2806915.375 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_FRA_08323"
@@ -9670,10 +9670,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Turkey | 2721769.642 tonnes net | gross AUS->TUR: 2721769.642 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_TUR_08349"
@@ -9689,10 +9689,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Turkey | 2639666.269 tonnes net | gross USA->TUR: 2639680.289 t, reverse: 14.02 t",
       "sourceId": "nf_2024_hard_coal_TUR_USA_09502"
@@ -9708,10 +9708,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Indonesia | 2433621.8 tonnes net | gross USA->IDN: 2433621.8 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_IDN_USA_09091"
@@ -9727,10 +9727,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Poland | 2317965.323 tonnes net | gross COL->POL: 2317965.323 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_POL_08716"
@@ -9746,10 +9746,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> Malaysia | 2301703.4 tonnes net | gross RUS->MYS: 2301703.4 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_MYS_RUS_09349"
@@ -9765,10 +9765,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Dominican Republic | 2276749.396 tonnes net | gross COL->DOM: 2276749.42 t, reverse: 0.024 t",
       "sourceId": "nf_2024_hard_coal_COL_DOM_08690"
@@ -9784,10 +9784,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Canada -> India | 2275568.593 tonnes net | gross CAN->IND: 2275593.603 t, reverse: 25.01 t",
       "sourceId": "nf_2024_hard_coal_CAN_IND_08555"
@@ -9803,10 +9803,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Israel | 2261680 tonnes net | gross COL->ISR: 2261680 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_ISR_08705"
@@ -9822,10 +9822,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> United Arab Emirates | 2145218.911 tonnes net | gross ZAF->ARE: 2145218.911 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_ARE_ZAF_08296"
@@ -9841,10 +9841,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Indonesia -> Brunei Darussalam | 2076800 tonnes net | gross IDN->BRN: 2076800 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_BRN_IDN_08529"
@@ -9860,10 +9860,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> United States | 2074734.229 tonnes net | gross COL->USA: 2074734.456 t, reverse: 0.227 t",
       "sourceId": "nf_2024_hard_coal_COL_USA_08725"
@@ -9879,10 +9879,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Mozambique -> China | 2072274.9 tonnes net | gross MOZ->CHN: 2072274.9 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_CHN_MOZ_08638"
@@ -9898,10 +9898,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> Netherlands | 1927238.098 tonnes net | gross ZAF->NLD: 1933653.748 t, reverse: 6415.65 t",
       "sourceId": "nf_2024_hard_coal_NLD_ZAF_09387"
@@ -9917,10 +9917,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Poland -> Czech Republic | 1819564.364 tonnes net | gross POL->CZE: 2370519.136 t, reverse: 550954.772 t",
       "sourceId": "nf_2024_hard_coal_CZE_POL_08757"
@@ -9936,10 +9936,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Russian Federation -> Sri Lanka | 1803974.36 tonnes net | gross RUS->LKA: 1803974.36 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_LKA_RUS_09276"
@@ -9955,10 +9955,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: South Africa -> Mozambique | 1755321.21 tonnes net | gross ZAF->MOZ: 1857811.842 t, reverse: 102490.632 t",
       "sourceId": "nf_2024_hard_coal_MOZ_ZAF_09337"
@@ -9974,10 +9974,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: United States -> Italy | 1710583.57 tonnes net | gross USA->ITA: 1710599.67 t, reverse: 16.1 t",
       "sourceId": "nf_2024_hard_coal_ITA_USA_09186"
@@ -9993,10 +9993,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Australia -> Belgium | 1701620.407 tonnes net | gross AUS->BEL: 1701620.407 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_AUS_BEL_08310"
@@ -10012,10 +10012,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Kazakhstan -> Morocco | 1643181 tonnes net | gross KAZ->MAR: 1643181 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_KAZ_MAR_09209"
@@ -10031,10 +10031,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Netherlands -> Germany | 1630183.528 tonnes net | gross NLD->DEU: 1669244.317 t, reverse: 39060.789 t",
       "sourceId": "nf_2024_hard_coal_DEU_NLD_08797"
@@ -10050,10 +10050,10 @@
       "commodityId": "hard_coal",
       "commodityGroup": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "tooltip": "Hard coal: Colombia -> Guatemala | 1622236.538 tonnes net | gross COL->GTM: 1622236.538 t, reverse: 0 t",
       "sourceId": "nf_2024_hard_coal_COL_GTM_08698"
@@ -22229,10 +22229,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Mexico | 28258533.673 tonnes net | gross USA->MEX: 38999424.471 t, reverse: 10740890.798 t",
       "sourceId": "nf_2024_refined_petroleum_MEX_USA_26912"
@@ -22248,10 +22248,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Russian Federation -> Turkey | 15999514.174 tonnes net | gross RUS->TUR: 16086651.885 t, reverse: 87137.711 t",
       "sourceId": "nf_2024_refined_petroleum_RUS_TUR_27552"
@@ -22267,10 +22267,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> Netherlands | 14868994.04 tonnes net | gross IND->NLD: 14874628.085 t, reverse: 5634.045 t",
       "sourceId": "nf_2024_refined_petroleum_IND_NLD_25835"
@@ -22286,10 +22286,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Russian Federation -> China | 14259590.436 tonnes net | gross RUS->CHN: 14341482.635 t, reverse: 81892.199 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_RUS_23747"
@@ -22305,10 +22305,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> Australia | 13074749.243 tonnes net | gross KOR->AUS: 13077251.91 t, reverse: 2502.667 t",
       "sourceId": "nf_2024_refined_petroleum_AUS_KOR_22144"
@@ -22324,10 +22324,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Netherlands -> Germany | 12985697.18 tonnes net | gross NLD->DEU: 17055901.16 t, reverse: 4070203.98 t",
       "sourceId": "nf_2024_refined_petroleum_DEU_NLD_24356"
@@ -22343,10 +22343,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Singapore -> Indonesia | 11846575.867 tonnes net | gross SGP->IDN: 15061068.189 t, reverse: 3214492.322 t",
       "sourceId": "nf_2024_refined_petroleum_IDN_SGP_25768"
@@ -22362,10 +22362,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Singapore -> Australia | 9885625.738 tonnes net | gross SGP->AUS: 10791476.11 t, reverse: 905850.372 t",
       "sourceId": "nf_2024_refined_petroleum_AUS_SGP_22180"
@@ -22381,10 +22381,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Russian Federation -> Brazil | 9095162.16 tonnes net | gross RUS->BRA: 9095931.386 t, reverse: 769.226 t",
       "sourceId": "nf_2024_refined_petroleum_BRA_RUS_23198"
@@ -22400,10 +22400,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> United Arab Emirates | 7499569.057 tonnes net | gross IND->ARE: 9622827.69 t, reverse: 2123258.633 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_IND_21878"
@@ -22419,10 +22419,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Russian Federation -> Singapore | 7402301.46 tonnes net | gross RUS->SGP: 7405140 t, reverse: 2838.54 t",
       "sourceId": "nf_2024_refined_petroleum_RUS_SGP_27547"
@@ -22438,10 +22438,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> South Korea | 7214269.564 tonnes net | gross ARE->KOR: 7502601.392 t, reverse: 288331.828 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_KOR_21888"
@@ -22457,10 +22457,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Brazil -> Singapore | 6964375.055 tonnes net | gross BRA->SGP: 6973797.103 t, reverse: 9422.048 t",
       "sourceId": "nf_2024_refined_petroleum_BRA_SGP_23201"
@@ -22476,10 +22476,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> Japan | 6754924.315 tonnes net | gross KOR->JPN: 8200602.69 t, reverse: 1445678.375 t",
       "sourceId": "nf_2024_refined_petroleum_JPN_KOR_26210"
@@ -22495,10 +22495,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Malaysia -> China | 6599110.8 tonnes net | gross MYS->CHN: 9460442.927 t, reverse: 2861332.127 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_MYS_23722"
@@ -22514,10 +22514,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Malaysia -> Australia | 6542455.702 tonnes net | gross MYS->AUS: 7013703.61 t, reverse: 471247.908 t",
       "sourceId": "nf_2024_refined_petroleum_AUS_MYS_22158"
@@ -22533,10 +22533,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> Singapore | 6400298.286 tonnes net | gross IND->SGP: 7025219.898 t, reverse: 624921.612 t",
       "sourceId": "nf_2024_refined_petroleum_IND_SGP_25856"
@@ -22552,10 +22552,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Chile | 6344902.126 tonnes net | gross USA->CHL: 6777426.328 t, reverse: 432524.202 t",
       "sourceId": "nf_2024_refined_petroleum_CHL_USA_23633"
@@ -22571,10 +22571,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> Singapore | 5950960.522 tonnes net | gross KOR->SGP: 7447334.197 t, reverse: 1496373.675 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_SGP_26480"
@@ -22590,10 +22590,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> Singapore | 5739233.92 tonnes net | gross ARE->SGP: 6021070.02 t, reverse: 281836.1 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_SGP_21926"
@@ -22609,10 +22609,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Russian Federation -> India | 5397324.618 tonnes net | gross RUS->IND: 5407407.872 t, reverse: 10083.254 t",
       "sourceId": "nf_2024_refined_petroleum_IND_RUS_25851"
@@ -22628,10 +22628,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> United States | 5356747.559 tonnes net | gross KOR->USA: 6331950.168 t, reverse: 975202.609 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_USA_26505"
@@ -22647,10 +22647,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> Philippines | 4961600.284 tonnes net | gross KOR->PHL: 4987045.034 t, reverse: 25444.75 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_PHL_26466"
@@ -22666,10 +22666,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> Japan | 4939623.668 tonnes net | gross ARE->JPN: 4941454.285 t, reverse: 1830.617 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_JPN_21883"
@@ -22685,10 +22685,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> Australia | 4844788.397 tonnes net | gross IND->AUS: 4856028.379 t, reverse: 11239.982 t",
       "sourceId": "nf_2024_refined_petroleum_AUS_IND_22135"
@@ -22704,10 +22704,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Belgium -> Nigeria | 4810813.102 tonnes net | gross BEL->NGA: 4958938.071 t, reverse: 148124.969 t",
       "sourceId": "nf_2024_refined_petroleum_BEL_NGA_22535"
@@ -22723,10 +22723,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Kuwait -> France | 4719926.055 tonnes net | gross KWT->FRA: 4721452.197 t, reverse: 1526.142 t",
       "sourceId": "nf_2024_refined_petroleum_FRA_KWT_25067"
@@ -22742,10 +22742,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Guatemala | 4547180.809 tonnes net | gross USA->GTM: 4549471.878 t, reverse: 2291.069 t",
       "sourceId": "nf_2024_refined_petroleum_GTM_USA_25563"
@@ -22761,10 +22761,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> United Kingdom | 4456466.726 tonnes net | gross USA->GBR: 5537425.094 t, reverse: 1080958.368 t",
       "sourceId": "nf_2024_refined_petroleum_GBR_USA_25285"
@@ -22780,10 +22780,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> New Zealand | 4383214.38 tonnes net | gross KOR->NZL: 4383979.846 t, reverse: 765.466 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_NZL_26461"
@@ -22799,10 +22799,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Kuwait -> United Kingdom | 4349172.597 tonnes net | gross KWT->GBR: 4350753.248 t, reverse: 1580.651 t",
       "sourceId": "nf_2024_refined_petroleum_GBR_KWT_25215"
@@ -22818,10 +22818,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Saudi Arabia -> France | 4285715.52 tonnes net | gross SAU->FRA: 4313444.094 t, reverse: 27728.574 t",
       "sourceId": "nf_2024_refined_petroleum_FRA_SAU_25117"
@@ -22837,10 +22837,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: China -> Singapore | 4248399.705 tonnes net | gross CHN->SGP: 7117821.067 t, reverse: 2869421.362 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_SGP_23752"
@@ -22856,10 +22856,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Oman -> South Africa | 4246685.684 tonnes net | gross OMN->ZAF: 4246685.684 t, reverse: 0 t",
       "sourceId": "nf_2024_refined_petroleum_OMN_ZAF_27350"
@@ -22875,10 +22875,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> United States | 4228104.433 tonnes net | gross IND->USA: 4703809.127 t, reverse: 475704.694 t",
       "sourceId": "nf_2024_refined_petroleum_IND_USA_25880"
@@ -22894,10 +22894,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Belgium -> Germany | 4219019.123 tonnes net | gross BEL->DEU: 5319986.131 t, reverse: 1100967.008 t",
       "sourceId": "nf_2024_refined_petroleum_BEL_DEU_22461"
@@ -22913,10 +22913,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Germany -> Switzerland | 4135016.523 tonnes net | gross DEU->CHE: 4415163.645 t, reverse: 280147.122 t",
       "sourceId": "nf_2024_refined_petroleum_CHE_DEU_23470"
@@ -22932,10 +22932,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Malaysia -> Indonesia | 4082164.143 tonnes net | gross MYS->IDN: 6171717.649 t, reverse: 2089553.506 t",
       "sourceId": "nf_2024_refined_petroleum_IDN_MYS_25750"
@@ -22951,10 +22951,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Peru | 3900237.652 tonnes net | gross USA->PER: 4443673.103 t, reverse: 543435.451 t",
       "sourceId": "nf_2024_refined_petroleum_PER_USA_27404"
@@ -22970,10 +22970,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Saudi Arabia -> United States | 3863804.221 tonnes net | gross SAU->USA: 3901158.894 t, reverse: 37354.673 t",
       "sourceId": "nf_2024_refined_petroleum_SAU_USA_27577"
@@ -22989,10 +22989,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Italy -> Gibraltar | 3837616.926 tonnes net | gross ITA->GIB: 3837618.8 t, reverse: 1.874 t",
       "sourceId": "nf_2024_refined_petroleum_GIB_ITA_25355"
@@ -23008,10 +23008,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Venezuela | 3808323.551 tonnes net | gross USA->VEN: 3899538.035 t, reverse: 91214.484 t",
       "sourceId": "nf_2024_refined_petroleum_USA_VEN_27817"
@@ -23027,10 +23027,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Ecuador | 3748592.444 tonnes net | gross USA->ECU: 4073171.208 t, reverse: 324578.764 t",
       "sourceId": "nf_2024_refined_petroleum_ECU_USA_24647"
@@ -23046,10 +23046,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> Vietnam | 3737081.293 tonnes net | gross KOR->VNM: 3744183.711 t, reverse: 7102.418 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_VNM_26508"
@@ -23065,10 +23065,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> China | 3729949.435 tonnes net | gross ARE->CHN: 4098342.02 t, reverse: 368392.585 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_CHN_21854"
@@ -23084,10 +23084,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: China -> Philippines | 3677984.844 tonnes net | gross CHN->PHL: 3687486.924 t, reverse: 9502.08 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_PHL_23736"
@@ -23103,10 +23103,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> South Africa | 3664191.365 tonnes net | gross IND->ZAF: 3679987.287 t, reverse: 15795.922 t",
       "sourceId": "nf_2024_refined_petroleum_IND_ZAF_25886"
@@ -23122,10 +23122,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Netherlands -> France | 3622734.963 tonnes net | gross NLD->FRA: 5554217.455 t, reverse: 1931482.492 t",
       "sourceId": "nf_2024_refined_petroleum_FRA_NLD_25098"
@@ -23141,10 +23141,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Iraq -> Turkey | 3603062.108 tonnes net | gross IRQ->TUR: 3661960.56 t, reverse: 58898.452 t",
       "sourceId": "nf_2024_refined_petroleum_IRQ_TUR_25985"
@@ -23160,10 +23160,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: China -> Liberia | 3590098.856 tonnes net | gross CHN->LBR: 3590098.856 t, reverse: 0 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_LBR_23699"
@@ -23179,10 +23179,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Iraq -> United States | 3529501.726 tonnes net | gross IRQ->USA: 3541200.936 t, reverse: 11699.21 t",
       "sourceId": "nf_2024_refined_petroleum_IRQ_USA_25988"
@@ -23198,10 +23198,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> South Africa | 3524886.19 tonnes net | gross ARE->ZAF: 3568763.357 t, reverse: 43877.167 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_ZAF_21942"
@@ -23217,10 +23217,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Algeria -> South Korea | 3523485.132 tonnes net | gross DZA->KOR: 3523512 t, reverse: 26.868 t",
       "sourceId": "nf_2024_refined_petroleum_DZA_KOR_24584"
@@ -23236,10 +23236,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Qatar -> South Korea | 3516884.412 tonnes net | gross QAT->KOR: 3520267.2 t, reverse: 3382.788 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_QAT_26473"
@@ -23255,10 +23255,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Germany -> Austria | 3445276.781 tonnes net | gross DEU->AUT: 3647925.4 t, reverse: 202648.619 t",
       "sourceId": "nf_2024_refined_petroleum_AUT_DEU_22225"
@@ -23274,10 +23274,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: South Korea -> China | 3339160.749 tonnes net | gross KOR->CHN: 3649160.23 t, reverse: 309999.481 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_KOR_23695"
@@ -23293,10 +23293,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Kuwait -> Japan | 3336733.154 tonnes net | gross KWT->JPN: 3336791.22 t, reverse: 58.066 t",
       "sourceId": "nf_2024_refined_petroleum_JPN_KWT_26211"
@@ -23312,10 +23312,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> Pakistan | 3241957.105 tonnes net | gross ARE->PAK: 3732893.105 t, reverse: 490936 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_PAK_21915"
@@ -23331,10 +23331,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Russian Federation -> Saudi Arabia | 3221010.1 tonnes net | gross RUS->SAU: 3221010.1 t, reverse: 0 t",
       "sourceId": "nf_2024_refined_petroleum_RUS_SAU_27545"
@@ -23350,10 +23350,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> Malaysia | 3199978.393 tonnes net | gross IND->MYS: 3530899.789 t, reverse: 330921.396 t",
       "sourceId": "nf_2024_refined_petroleum_IND_MYS_25831"
@@ -23369,10 +23369,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Saudi Arabia -> Singapore | 3182054.854 tonnes net | gross SAU->SGP: 3192420.757 t, reverse: 10365.903 t",
       "sourceId": "nf_2024_refined_petroleum_SAU_SGP_27565"
@@ -23388,10 +23388,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: China -> Australia | 3141215.602 tonnes net | gross CHN->AUS: 3271394.968 t, reverse: 130179.366 t",
       "sourceId": "nf_2024_refined_petroleum_AUS_CHN_22109"
@@ -23407,10 +23407,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Dominican Republic | 3094560.168 tonnes net | gross USA->DOM: 3096080.432 t, reverse: 1520.264 t",
       "sourceId": "nf_2024_refined_petroleum_DOM_USA_24569"
@@ -23426,10 +23426,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Singapore -> Myanmar | 3082650.408 tonnes net | gross SGP->MMR: 3084165.825 t, reverse: 1515.417 t",
       "sourceId": "nf_2024_refined_petroleum_MMR_SGP_26991"
@@ -23445,10 +23445,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Algeria -> United States | 3072381.327 tonnes net | gross DZA->USA: 3088648.458 t, reverse: 16267.131 t",
       "sourceId": "nf_2024_refined_petroleum_DZA_USA_24605"
@@ -23464,10 +23464,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Saudi Arabia -> Italy | 3069865.005 tonnes net | gross SAU->ITA: 3452808.944 t, reverse: 382943.939 t",
       "sourceId": "nf_2024_refined_petroleum_ITA_SAU_26145"
@@ -23483,10 +23483,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Germany -> Poland | 3059673.657 tonnes net | gross DEU->POL: 3212042.342 t, reverse: 152368.685 t",
       "sourceId": "nf_2024_refined_petroleum_DEU_POL_24365"
@@ -23502,10 +23502,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Kuwait -> South Korea | 3029503.696 tonnes net | gross KWT->KOR: 3031111.165 t, reverse: 1607.469 t",
       "sourceId": "nf_2024_refined_petroleum_KOR_KWT_26430"
@@ -23521,10 +23521,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> France | 3020290.489 tonnes net | gross ARE->FRA: 3026231.822 t, reverse: 5941.333 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_FRA_21869"
@@ -23540,10 +23540,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Singapore -> Vietnam | 2944146.48 tonnes net | gross SGP->VNM: 3267171.5 t, reverse: 323025.02 t",
       "sourceId": "nf_2024_refined_petroleum_SGP_VNM_27627"
@@ -23559,10 +23559,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> Togo | 2896819.443 tonnes net | gross IND->TGO: 2896819.443 t, reverse: 0 t",
       "sourceId": "nf_2024_refined_petroleum_IND_TGO_25869"
@@ -23578,10 +23578,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Honduras | 2891794.226 tonnes net | gross USA->HND: 2891794.262 t, reverse: 0.036 t",
       "sourceId": "nf_2024_refined_petroleum_HND_USA_25607"
@@ -23597,10 +23597,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Qatar -> Japan | 2799885.077 tonnes net | gross QAT->JPN: 2800004.679 t, reverse: 119.602 t",
       "sourceId": "nf_2024_refined_petroleum_JPN_QAT_26253"
@@ -23616,10 +23616,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Singapore -> New Zealand | 2698909.695 tonnes net | gross SGP->NZL: 2700415.404 t, reverse: 1505.709 t",
       "sourceId": "nf_2024_refined_petroleum_NZL_SGP_27315"
@@ -23635,10 +23635,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United Arab Emirates -> Saudi Arabia | 2525206.617 tonnes net | gross ARE->SAU: 2526792.043 t, reverse: 1585.426 t",
       "sourceId": "nf_2024_refined_petroleum_ARE_SAU_21924"
@@ -23654,10 +23654,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Germany -> Czech Republic | 2479319.845 tonnes net | gross DEU->CZE: 2799590.011 t, reverse: 320270.166 t",
       "sourceId": "nf_2024_refined_petroleum_CZE_DEU_24189"
@@ -23673,10 +23673,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> Tanzania | 2470912.821 tonnes net | gross IND->TZA: 2471045.621 t, reverse: 132.8 t",
       "sourceId": "nf_2024_refined_petroleum_IND_TZA_25876"
@@ -23692,10 +23692,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: Iraq -> China | 2455975.157 tonnes net | gross IRQ->CHN: 2458601.804 t, reverse: 2626.647 t",
       "sourceId": "nf_2024_refined_petroleum_CHN_IRQ_23682"
@@ -23711,10 +23711,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: United States -> Bahamas | 2451453.014 tonnes net | gross USA->BHS: 3502777.804 t, reverse: 1051324.79 t",
       "sourceId": "nf_2024_refined_petroleum_BHS_USA_22935"
@@ -23730,10 +23730,10 @@
       "commodityId": "refined_petroleum",
       "commodityGroup": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "tooltip": "Refined petroleum products: India -> France | 2428772.394 tonnes net | gross IND->FRA: 2432374.126 t, reverse: 3601.732 t",
       "sourceId": "nf_2024_refined_petroleum_FRA_IND_25053"
@@ -31393,10 +31393,10 @@
       "name": "Crude oil",
       "group": "energy",
       "color": [
-        21,
-        20,
-        18,
-        219
+        190,
+        188,
+        170,
+        229
       ],
       "maxQuantity": 182728346.0
     },
@@ -31405,10 +31405,10 @@
       "name": "Hard coal",
       "group": "energy",
       "color": [
-        54,
-        50,
-        45,
-        214
+        168,
+        150,
+        116,
+        229
       ],
       "maxQuantity": 109249126.771
     },
@@ -31513,10 +31513,10 @@
       "name": "Refined petroleum products",
       "group": "energy",
       "color": [
-        79,
-        86,
-        92,
-        209
+        152,
+        179,
+        197,
+        224
       ],
       "maxQuantity": 28258533.673
     },

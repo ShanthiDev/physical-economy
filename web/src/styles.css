@@ -395,6 +395,11 @@ input[type="range"] {
   line-height: 1.35;
 }
 
+.particle-unit {
+  margin: -0.1rem 0 0.75rem;
+  color: var(--ink);
+}
+
 .flow-tooltip {
   position: absolute;
   z-index: 5;
