@@ -25,9 +25,9 @@ Diese Entscheidungen folgen direkt aus der Bestandsaufnahme und gelten für alle
 
 ## 2. Arbeitspaket-Übersicht
 
-| AP | Titel | Hängt ab von | Ebene |
-|---|---|---|---|
-| R1 | Frontend-Modularisierung (ohne Verhaltensänderung) + Vitest | — | Frontend |
+| AP | Titel | Hängt ab von | Ebene | Status |
+|---|---|---|---|---|
+| R1 | Frontend-Modularisierung (ohne Verhaltensänderung) + Vitest | — | Frontend | ✅ 2026-07-20 02:07 CEST · Branch `ap-r1-frontend-modularisierung` · Commits `306e6b2`, `1fee254` |
 | R2 | Zentraler App-State + kontrollierte Kamera | R1 | Frontend |
 | R3 | Renderdaten pro Jahr + `index.json` + Lazy-Load; Tests auf Seed-Daten | R2 (Frontend-Teil) | Pipeline+Frontend |
 | R4 | Ländermap-Härtung: vendoren, ISO-Brücke, Klick-Selektion | R2 | Frontend+Referenzdaten |
